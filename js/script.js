@@ -36,13 +36,13 @@ for (let i = 2; i >= 0; i--) {
         );
         break;
       default:
-        alert("Lo siento, el numero elegido no es correcto");
+        alert("Lo siento, el número elegido no es correcto");
         break;
     }
     break;
   } else {
     alert(
-      "Tu contraseña es incorrecta, vuelve a intentarlo, te quedan " +
+      "Tu contraseña es incorrecta, te quedan " +
       i +
       " intentos"
     );

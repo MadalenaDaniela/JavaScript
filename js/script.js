@@ -1,50 +1,86 @@
 
-
-alert("Bienvenido a centro de adopción de mascotas");
+alert("Bienvenido al centro de prestamos del Banco JavaScript");
 let contraseña = "entrar01";
 
-for (let i = 2; i >= 0; i--) {
-  let ingreso = prompt("Ingresá tu contraseña");
-  if (contraseña == ingreso) {
-    alert("Bienvenido/a");
+let nombre = prompt("Por favor ingrese su nombre:");
 
-    let edad = prompt("Por favor ingresá tu edad:");
+let edad = parseInt(prompt("Indique su edad:"));
 
-    while (edad < 18) {
-      alert("No podés adoptar un animal siendo menor de 18 años, lo siento");
-      edad = prompt("Por favor ingresá tu edad:");
-    }
-
-    let pedido = prompt(
-      "Por favor elegí que animal queres adoptar:\n1. Perro \n2. Gato \n3. Conejo"
-    );
-
-    switch (pedido) {
-      case "1":
-        alert(
-          "Has adoptado un perrito llamado Rocko, pronto llegará a su nuevo hogar"
-        );
-        break;
-      case "2":
-        alert(
-          "Has adoptado un gatito llamado Pepe, pronto llegará a su nuevo hogar"
-        );
-        break;
-      case "3":
-        alert(
-          "Has adoptado un conejito llamado Julio, pronto llegará a su nuevo hogar"
-        );
-        break;
-      default:
-        alert("Lo siento, el número elegido no es correcto");
-        break;
-    }
-    break;
-  } else {
+while (edad < 18) {
     alert(
-      "Tu contraseña es incorrecta, te quedan " +
-      i +
-      " intentos"
+        "Lo siento, debes ser mayor de edad para acceder a un préstamo bancario en nuestra entidad."
     );
-  }
+    edad = parseInt(prompt("Indique su edad:"));
+}
+
+let cuenta = prompt(nombre + " es usted cliente de nuestro banco?\n1. Si, lo soy\n2. No, no lo soy");
+
+function porcentajeCliente(numeroA) {
+    let resultado = (numeroA * 8) / 100 + numeroA;
+    return resultado;
+}
+
+function porcentajeNoCliente(numeroA) {
+    let resultado = (numeroA * 10) / 100 + numeroA;
+    return resultado;
+}
+
+if (cuenta == 1) {
+    for (let i = 2; i >= 0; i--) {
+        entrar = prompt("Por favor ingrese su contraseña");
+        if (contraseña == entrar) {
+            alert("Bienvenida/o " + nombre);
+
+            let prestamoCliente = prompt(
+                "Por ser cliente de nuestro banco la tasa de interés por su prestamos es solo del 8%\n\nPor favor, elija entre los valores que podemos ofrecerle:\n1. $20000\n2. $50000\n3. $80000\n4. $100000");
+            switch (prestamoCliente) {
+                case "1":
+                    alert("Su total a pagar será de $" + porcentajeCliente(20000));
+                    break;
+
+                case "2":
+                    alert("Su total a pagar será de $" + porcentajeCliente(50000));
+                    break;
+
+                case "3":
+                    alert("Su total a pagar será de $" + porcentajeCliente(80000));
+                    break;
+
+                case "4":
+                    alert("Su total a pagar será de $" + porcentajeCliente(100000));
+                    break;
+
+                default:
+                    alert("Lo siento el número ingresado no es corresto");
+                    break;
+            }
+
+            break;
+        } else {
+            alert("Lo siento, la contraseña es incorrecta, te quedan " + i + ' intentos');
+        }
+    }
+} else if (cuenta == 2) {
+    let prestamoNoCliente = prompt(
+        "La tasa de interés para no-clientes es del 10%\n\nPor favor, elija entre los valores que podemos ofrecerle:\n1. $20000\n2. $50000\n3. $80000\n4. $100000"
+    );
+    switch (prestamoNoCliente) {
+        case "1":
+            alert("Su total a pagar será de $" + porcentajeNoCliente(20000));
+            break;
+
+        case "2":
+            alert("Su total a pagar será de $" + porcentajeNoCliente(50000));
+            break;
+
+        case "3":
+            alert("Su total a pagar será de $" + porcentajeNoCliente(80000));
+            break;
+
+        case "4":
+            alert("Su total a pagar será de $" + porcentajeNoCliente(100000));
+            break;
+    }
+} else {
+    alert("Lo siento, el numero ingresado no es correcto");
 }

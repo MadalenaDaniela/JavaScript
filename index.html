@@ -16,13 +16,15 @@
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">JavaScript</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-link" href="#">Ingresar</a>
             <a class="nav-link" href="#">Prestamos</a>
+            <a class="nav-link" href="#">Planes</a>
             <a class="nav-link" href="#">No clientes</a>
           </div>
         </div>
@@ -34,6 +36,22 @@
   <main>
     <section>
       <h2 class="titulo">Bienvenido al simulador de préstamos del banco JavaScript</h2>
+      <h3 class="titulo subtitulo">Por favor ingrese sus datos de ingreso:</h3>
+      <form class="container" action="#" method="post">
+        <div class="form">
+          <label for="nombre">Ingrese su nombre y apellido:</label>
+          <input type="text" class="form-control" placeholder="Nombre Apellido">
+          <label for="nombreUsusrio">Ingrese su nombre de usuario:</label>
+          <input type="text" class="form-control" placeholder="juan01">
+          <label for="contrasenia">Ingrese su contraseña:</label>
+          <input type="text" type="password" class="form-control" placeholder="********">
+          <div>
+            <button type="submit" class="btn btn-primary">Ingresar</button>
+          </div>
+        </div>
+      </form>
+    </section>
+    <section>
       <h3 class="titulo subtitulo">Por favor ingrese cantidad y forma de pago</h3>
       <form class="container" action="#" method="post">
         <div class="form">
@@ -54,6 +72,7 @@
             <option value="cuota2">3 Cuotas</option>
             <option value="cuota3">6 Cuotas</option>
             <option value="cuota4">12 Cuotas</option>
+            <option value="cuota5">18 Cuotas</option>
           </select>
         </div>
         <div>

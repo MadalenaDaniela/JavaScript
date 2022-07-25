@@ -30,56 +30,30 @@
         </div>
       </div>
     </nav>
-
     <h1 class="header">Banco JavaScript</h1>
   </header>
   <main>
-    <section>
-      <h2 class="titulo">Bienvenido al simulador de préstamos del banco JavaScript</h2>
-      <h3 class="titulo subtitulo">Por favor ingrese sus datos de ingreso:</h3>
-      <form class="container" action="#" method="post">
-        <div class="form">
-          <label for="nombre">Ingrese su nombre y apellido:</label>
-          <input type="text" class="form-control" placeholder="Nombre Apellido">
-          <label for="nombreUsusrio">Ingrese su nombre de usuario:</label>
-          <input type="text" class="form-control" placeholder="juan01">
-          <label for="contrasenia">Ingrese su contraseña:</label>
-          <input type="text" type="password" class="form-control" placeholder="********">
-          <div>
-            <button type="submit" class="btn btn-primary">Ingresar</button>
-          </div>
-        </div>
-      </form>
+    <section id="section1">
+      <h2 class="titulo" id="titulo">Bienvenido al simulador de préstamos del banco JavaScript</h2>
+      <h3 class="titulo subtitulo" id="subtitulo">¿Es usted cliente de Banco JavaScript?</h3>
+      <div class="titulo subtitulo">
+        <button id="btnSi" type="submit" class="btn btn-primary">Si</button>
+      </div>
+      <div class="titulo subtitulo">
+        <button id="btnNo" type="submit" class="btn btn-primary">No</button>
+      </div>
+      <div class="titulo subtitulo">
+        <button id="btnQuiero" type="submit" class="btn btn-primary">Quiero serlo</button>
+      </div>
+
     </section>
-    <section>
-      <h3 class="titulo subtitulo">Por favor ingrese cantidad y forma de pago</h3>
-      <form class="container" action="#" method="post">
-        <div class="form">
-          <label for="monto">Seleccione monto:</label>
-          <select class="form-select" aria-label="Default select example">
-            <option selected>Seleccione</option>
-            <option value="1">$20000</option>
-            <option value="2">$50000</option>
-            <option value="3">$80000</option>
-            <option value="3">$100000</option>
-          </select>
-        </div>
-        <div class="form">
-          <label for="cuotas">Seleccione cuotas:</label>
-          <select class="form-select" aria-label="Default select example">
-            <option selected>Seleccione</option>
-            <option value="cuota1">1 Cuota</option>
-            <option value="cuota2">3 Cuotas</option>
-            <option value="cuota3">6 Cuotas</option>
-            <option value="cuota4">12 Cuotas</option>
-            <option value="cuota5">18 Cuotas</option>
-          </select>
-        </div>
-        <div>
-          <button type="submit" class="btn btn-primary">Calcular</button>
-        </div>
-      </form>
+    <section class="titulo subtitulo" id="contenedor">
+      <img id="img" class="img" src="recursos/portada1.jpg" alt="JavaScript">
     </section>
+
+    <footer>
+      <p>Todos los derechos reservados</p>
+    </footer>
   </main>
   <footer>
     <p>Todos los derechos reservados</p>

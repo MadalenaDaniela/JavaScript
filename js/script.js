@@ -310,10 +310,12 @@ quieroCliente.onclick = () => {
           <div class="form">
           <label for="nombre">Ingrese su nombre y apellido:</label>
           <input id="usuario" type="text" class="form-control" placeholder="Nombre Apellido">
+          <label for="telefono">Ingrese un teléfono de contacto:</label>
+            <input id="telefono" type="number" class="form-control" placeholder="1112345678">
             <label for="nombreUsuario">Ingrese un nombre de usuario:</label>
             <input id="nombreUsuario" type="text" class="form-control" placeholder="juan01">
             <label for="contrasenia">Ingrese una contraseña:</label>
-            <input id="contrasenia" type="text" type="password" class="form-control" placeholder="********">
+            <input id="contrasenia" type="password" class="form-control" placeholder="********">
             <div>
               <button id="ingreso" type="submit" class="btn btn-primary">Crear</button>
             </div>
@@ -327,6 +329,7 @@ quieroCliente.onclick = () => {
 
     ingreso.onclick = (evento) => {
         let clienteUsuario = document.getElementById('usuario').value;
+        let clienteTelefono = document.getElementById('telefono').value;
         let identificacionUsuario = document.getElementById('nombreUsuario').value;
         let contraseniaUsuario = document.getElementById('contrasenia').value;
         evento.preventDefault();
@@ -334,6 +337,7 @@ quieroCliente.onclick = () => {
         const usuario = {
 
             cliente: clienteUsuario,
+            telefono: clienteTelefono,
             identificacion: identificacionUsuario,
             contrasenia: contraseniaUsuario,
         }
@@ -360,7 +364,7 @@ quieroCliente.onclick = () => {
         boton = document.createElement('div');
         boton.className = 'titulo subtitulo';
         boton.innerHTML = `<div>
-            <button id="basico" type="submit" class="btn btn-primary">Basico</button>
+            <button id="basico" type="submit" class="btn btn-primary">Básico</button>
             <button id="platino" type="submit" class="btn btn-primary">Platino</button>
             <button id="dorado" type="submit" class="btn btn-primary">Dorado</button>
             <button id="black" type="submit" class="btn btn-primary">Black</button>
@@ -377,8 +381,8 @@ quieroCliente.onclick = () => {
             let titulo = document.createElement('h3');
             titulo.className = 'titulo subtitulo';
             titulo.innerHTML = `<h3 class="titulo subtitulo">Plan elegido: Básico</h3>
-            <img id="img1" class="img" src="recursos/1sinFondo.png" alt="JavaScript">
-            <h3 class="titulo subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted. Saludos. </h3>`
+            <h3 class="titulo subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted al: ${usuario.telefono}. Saludos. </h3>
+            <img id="img1" class="img" src="recursos/basico.png" alt="JavaScript">`
 
             contenedor.append(titulo);
         }
@@ -392,8 +396,8 @@ quieroCliente.onclick = () => {
             let titulo = document.createElement('h3');
             titulo.className = 'titulo subtitulo';
             titulo.innerHTML = `<h3 class="titulo subtitulo">Plan elegido: Platino</h3>
-            <img id="img1" class="img" src="recursos/2sinFondo.png" alt="JavaScript">
-            <h3 class="titulo subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted. Saludos. </h3>`
+            <h3 class="titulo subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted al: ${usuario.telefono}. Saludos. </h3>
+            <img id="img1" class="img" src="recursos/platino.png" alt="JavaScript">`
 
             contenedor.append(titulo);
 
@@ -408,8 +412,8 @@ quieroCliente.onclick = () => {
             let titulo = document.createElement('h3');
             titulo.className = 'titulo subtitulo';
             titulo.innerHTML = `<h3 class="titulo subtitulo">Plan elegido: Dorado</h3>
-                <img id="img1" class="img" src="recursos/3sinFondo.png" alt="JavaScript">
-                <h3 class="titulo subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted. Saludos. </h3>`
+            <h3 class="titulo subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted al: ${usuario.telefono}. Saludos. </h3>
+            <img id="img1" class="img" src="recursos/dorado.png" alt="JavaScript">`
 
             contenedor.append(titulo);
         }
@@ -423,8 +427,8 @@ quieroCliente.onclick = () => {
             let titulo = document.createElement('h3');
             titulo.className = 'titulo subtitulo';
             titulo.innerHTML = `<h3 class="titulo subtitulo">Plan elegido: Black</h3>
-                    <img id="img1" class="img" src="recursos/4sinFondo.png" alt="JavaScript">
-                    <h3 class="titulo subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted. Saludos. </h3>`
+            <h3 class="titulo subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted al: ${usuario.telefono}. Saludos. </h3>
+            <img id="img1" class="img" src="recursos/black.png" alt="JavaScript">`
 
             contenedor.append(titulo);
         }

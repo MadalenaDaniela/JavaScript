@@ -61,11 +61,19 @@ button {
 footer {
     background-color: rgb(219, 213, 213);
     text-align: center;
-    padding: 4rem;
+    padding: 6rem;
 }
 
 .img {
-    width: 70vw;
+    
+    width: 50vw;
     height: auto;
+    
 }
+
+.form-check {
+    display: flex;
+    align-items: center;
+}
+
 

@@ -9,10 +9,11 @@ body {
 }
 
 .header {
-    background-image: url(../recursos/portada.jpg);
-    padding: 8rem;
+    background-image: url(../recursos/portada1.jpg);
+    background-size: cover;
+    padding: 10rem;
     font-size: 1.8rem;
-    text-align: end;
+    text-align: center;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
@@ -68,6 +69,7 @@ footer {
     
     width: 50vw;
     height: auto;
+    border-radius: 2rem;
     
 }
 

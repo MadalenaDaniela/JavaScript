@@ -174,23 +174,23 @@ cliente.onclick = () => {
 
                         ];
 
-                        let cuotas = parseInt(document.getElementById('cuotasCantidad').value);
-                        const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotas);
-                        let disponibles = JSON.stringify(filtro);
+                        let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
+                        const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
+                        const disponibleCuota = JSON.stringify(filtro.cuotas);
+                        const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
 
                         function cuotasFunction() {
                             contenedor.innerHTML = ``;
 
-                            let cuotas = document.createElement('div');
-                            cuotas.innerHTML = `<div class="titulo subtitulo">
-                            Las cuotas disponibles en base a su solicitud son: ${disponibles}
+                            let financiacion = document.createElement('div');
+                            financiacion.innerHTML = `<div class="titulo subtitulo">
+                            Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}
                             </div>
                             <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
-                            contenedor.append(cuotas);
+                            contenedor.append(financiacion);
                         }
 
-                        cuotas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
-
+                        cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
                         let finalizar = document.getElementById('finalizar');
 
                         finalizar.onclick = () => {
@@ -280,22 +280,23 @@ cliente.onclick = () => {
 
                         ];
 
-                        let cuotas = parseInt(document.getElementById('cuotasCantidad').value);
-                        const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotas);
-                        let disponibles = JSON.stringify(filtro);
+                        let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
+                        const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
+                        const disponibleCuota = JSON.stringify(filtro.cuotas);
+                        const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
 
                         function cuotasFunction() {
                             contenedor.innerHTML = ``;
 
-                            let cuotas = document.createElement('div');
-                            cuotas.innerHTML = `<div class="titulo subtitulo">
-                            Las cuotas disponibles en base a su solicitud son: ${disponibles}
+                            let financiacion = document.createElement('div');
+                            financiacion.innerHTML = `<div class="titulo subtitulo">
+                            Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}
                             </div>
                             <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
-                            contenedor.append(cuotas);
+                            contenedor.append(financiacion);
                         }
 
-                        cuotas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
+                        cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
 
                         let finalizar = document.getElementById('finalizar');
 
@@ -386,22 +387,23 @@ cliente.onclick = () => {
 
                         ];
 
-                        let cuotas = parseInt(document.getElementById('cuotasCantidad').value);
-                        const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotas);
-                        let disponibles = JSON.stringify(filtro);
+                        let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
+                        const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
+                        const disponibleCuota = JSON.stringify(filtro.cuotas);
+                        const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
 
                         function cuotasFunction() {
                             contenedor.innerHTML = ``;
 
-                            let cuotas = document.createElement('div');
-                            cuotas.innerHTML = `<div class="titulo subtitulo">
-                            Las cuotas disponibles en base a su solicitud son: ${disponibles}
+                            let financiacion = document.createElement('div');
+                            financiacion.innerHTML = `<div class="titulo subtitulo">
+                            Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}
                             </div>
                             <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
-                            contenedor.append(cuotas);
+                            contenedor.append(financiacion);
                         }
 
-                        cuotas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
+                        cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
 
                         let finalizar = document.getElementById('finalizar');
 
@@ -491,23 +493,23 @@ cliente.onclick = () => {
                             }
 
                         ];
-
-                        let cuotas = parseInt(document.getElementById('cuotasCantidad').value);
-                        const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotas);
-                        let disponibles = JSON.stringify(filtro);
+                        let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
+                        const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
+                        const disponibleCuota = JSON.stringify(filtro.cuotas);
+                        const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
 
                         function cuotasFunction() {
                             contenedor.innerHTML = ``;
 
-                            let cuotas = document.createElement('div');
-                            cuotas.innerHTML = `<div class="titulo subtitulo">
-                            Las cuotas disponibles en base a su solicitud son: ${disponibles}
+                            let financiacion = document.createElement('div');
+                            financiacion.innerHTML = `<div class="titulo subtitulo">
+                            Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}
                             </div>
                             <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
-                            contenedor.append(cuotas);
+                            contenedor.append(financiacion);
                         }
 
-                        cuotas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
+                        cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
 
                         let finalizar = document.getElementById('finalizar');
 
@@ -799,22 +801,23 @@ noCliente.onclick = (prevent) => {
 
                 ];
 
-                let cuotas = parseInt(document.getElementById('cuotasCantidad').value);
-                const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotas);
-                let disponibles = JSON.stringify(filtro);
+                let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
+                const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
+                const disponibleCuota = JSON.stringify(filtro.cuotas);
+                const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
 
                 function cuotasFunction() {
                     contenedor.innerHTML = ``;
 
-                    let cuotas = document.createElement('div');
-                    cuotas.innerHTML = `<div class="titulo subtitulo">
-                    Las cuotas disponibles en base a su solicitud son: ${disponibles}
-                    </div>
-                    <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
-                    contenedor.append(cuotas);
+                    let financiacion = document.createElement('div');
+                    financiacion.innerHTML = `<div class="titulo subtitulo">
+                            Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}
+                            </div>
+                            <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
+                    contenedor.append(financiacion);
                 }
 
-                cuotas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
+                cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
 
                 let finalizar = document.getElementById('finalizar');
 
@@ -939,22 +942,23 @@ noCliente.onclick = (prevent) => {
 
                 ];
 
-                let cuotas = parseInt(document.getElementById('cuotasCantidad').value);
-                const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotas);
-                let disponibles = JSON.stringify(filtro);
+                let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
+                const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
+                const disponibleCuota = JSON.stringify(filtro.cuotas);
+                const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
 
                 function cuotasFunction() {
                     contenedor.innerHTML = ``;
 
-                    let cuotas = document.createElement('div');
-                    cuotas.innerHTML = `<div class="titulo subtitulo">
-                    Las cuotas disponibles en base a su solicitud son: ${disponibles}
-                    </div>
-                    <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
-                    contenedor.append(cuotas);
+                    let financiacion = document.createElement('div');
+                    financiacion.innerHTML = `<div class="titulo subtitulo">
+                            Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}
+                            </div>
+                            <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
+                    contenedor.append(financiacion);
                 }
 
-                cuotas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
+                cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
 
                 let finalizar = document.getElementById('finalizar');
 
@@ -1000,7 +1004,7 @@ noCliente.onclick = (prevent) => {
                         contenedor.innerHTML = ``;
 
                         let contacto = document.createElement('div');
-                        contacto.innerHTML =`
+                        contacto.innerHTML = `
                         <div class="titulo subtitulo">
                             <div>${nombre} un represtenate se pondrá en contacto con usted a los medios proporcionados: </div>
                             <div>Teléfono: ${telefono}</div>
@@ -1078,22 +1082,23 @@ noCliente.onclick = (prevent) => {
 
                 ];
 
-                let cuotas = parseInt(document.getElementById('cuotasCantidad').value);
-                const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotas);
-                let disponibles = JSON.stringify(filtro);
+                let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
+                const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
+                const disponibleCuota = JSON.stringify(filtro.cuotas);
+                const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
 
                 function cuotasFunction() {
                     contenedor.innerHTML = ``;
 
-                    let cuotas = document.createElement('div');
-                    cuotas.innerHTML = `<div class="titulo subtitulo">
-                    Las cuotas disponibles en base a su solicitud son: ${disponibles}
-                    </div>
-                    <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
-                    contenedor.append(cuotas);
+                    let financiacion = document.createElement('div');
+                    financiacion.innerHTML = `<div class="titulo subtitulo">
+                            Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}
+                            </div>
+                            <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
+                    contenedor.append(financiacion);
                 }
 
-                cuotas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
+                cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
 
                 let finalizar = document.getElementById('finalizar');
 
@@ -1139,7 +1144,7 @@ noCliente.onclick = (prevent) => {
                         contenedor.innerHTML = ``;
 
                         let contacto = document.createElement('div');
-                        contacto.innerHTML =`
+                        contacto.innerHTML = `
                         <div class="titulo subtitulo">
                             <div>${nombre} un represtenate se pondrá en contacto con usted a los medios proporcionados: </div>
                             <div>Teléfono: ${telefono}</div>
@@ -1218,22 +1223,23 @@ noCliente.onclick = (prevent) => {
 
                 ];
 
-                let cuotas = parseInt(document.getElementById('cuotasCantidad').value);
-                const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotas);
-                let disponibles = JSON.stringify(filtro);
+                let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
+                const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
+                const disponibleCuota = JSON.stringify(filtro.cuotas);
+                const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
 
                 function cuotasFunction() {
                     contenedor.innerHTML = ``;
 
-                    let cuotas = document.createElement('div');
-                    cuotas.innerHTML = `<div class="titulo subtitulo">
-                    Las cuotas disponibles en base a su solicitud son: ${disponibles}
-                    </div>
-                    <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
-                    contenedor.append(cuotas);
+                    let financiacion = document.createElement('div');
+                    financiacion.innerHTML = `<div class="titulo subtitulo">
+                            Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}
+                            </div>
+                            <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
+                    contenedor.append(financiacion);
                 }
 
-                cuotas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
+                cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
 
                 let finalizar = document.getElementById('finalizar');
 
@@ -1279,7 +1285,7 @@ noCliente.onclick = (prevent) => {
                         contenedor.innerHTML = ``;
 
                         let contacto = document.createElement('div');
-                        contacto.innerHTML =`
+                        contacto.innerHTML = `
                         <div class="titulo subtitulo">
                             <div>${nombre} un represtenate se pondrá en contacto con usted a los medios proporcionados: </div>
                             <div>Teléfono: ${telefono}</div>

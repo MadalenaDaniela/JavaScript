@@ -50,6 +50,7 @@ cliente.onclick = () => {
 
         let usuario = document.getElementById('nombreUsuario').value;
         let contrasenia = document.getElementById('contrasenia').value;
+
         class Usuario {
             constructor(usuario, contrasenia) {
                 this.usuario = usuario;
@@ -74,7 +75,7 @@ cliente.onclick = () => {
                 sessionStorage.setItem(`nombre`, usuario);
                 sessionStorage.setItem(`contrasenia`, contrasenia);
 
-                const nombreUsuarioSession = localStorage.getItem('nombre');
+                const nombreUsuarioSession = sessionStorage.getItem('nombre');
                 alert('Su ' + nombreUsuarioSession + ' no se ha guardado en este dispositivo');
             }
 
@@ -153,28 +154,58 @@ cliente.onclick = () => {
 
                         prevent.preventDefault();
 
-                        const cuotasDisponibles = [1, 3, 6, 9, 12, 18];
+                        const cuotasDisponibles = [
+                            {
+                                cuotas: 1,
+                                totalCadaCuota: resultado
+                            }, {
+                                cuotas: 3,
+                                totalCadaCuota: (resultado / 3)
+                            }, {
+                                cuotas: 6,
+                                totalCadaCuota: (resultado / 6)
+                            }, {
+                                cuotas: 9,
+                                totalCadaCuota: (resultado / 9)
+                            }, {
+                                cuotas: 12,
+                                totalCadaCuota: (resultado / 12)
+                            }
+
+                        ];
 
                         let cuotas = parseInt(document.getElementById('cuotasCantidad').value);
-                        const filtro = cuotasDisponibles.filter((cuota) => cuota >= cuotas);
+                        const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotas);
                         let disponibles = JSON.stringify(filtro);
 
-                        if (cuotas <= 18) {
-
+                        function cuotasFunction() {
                             contenedor.innerHTML = ``;
 
                             let cuotas = document.createElement('div');
                             cuotas.innerHTML = `<div class="titulo subtitulo">
-                Las cuotas disponibles son ${disponibles}
-                </div>`;
+                            Las cuotas disponibles en base a su solicitud son: ${disponibles}
+                            </div>
+                            <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
                             contenedor.append(cuotas);
+                        }
 
-                        } else {
+                        cuotas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
 
-                            alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
+                        let finalizar = document.getElementById('finalizar');
+
+                        finalizar.onclick = () => {
+                            contenedor.innerHTML = ``;
+
+                            let fin = document.createElement('div');
+                            fin.innerHTML = `<div class="titulo subtitulo">
+                            Gracias por elegirnos, su préstamo será depositado en su cuenta JavaScript.
+                            </div>`;
+                            contenedor.append(fin);
+
                         }
                     }
                 }
+
             }
 
             let dos = document.getElementById('50');
@@ -229,25 +260,54 @@ cliente.onclick = () => {
                     cuotasBoton.onclick = (prevent) => {
 
                         prevent.preventDefault();
-                        const cuotasDisponibles = [1, 3, 6, 9, 12, 18];
+                        const cuotasDisponibles = [
+                            {
+                                cuotas: 1,
+                                totalCadaCuota: resultado
+                            }, {
+                                cuotas: 3,
+                                totalCadaCuota: (resultado / 3)
+                            }, {
+                                cuotas: 6,
+                                totalCadaCuota: (resultado / 6)
+                            }, {
+                                cuotas: 9,
+                                totalCadaCuota: (resultado / 9)
+                            }, {
+                                cuotas: 12,
+                                totalCadaCuota: (resultado / 12)
+                            }
+
+                        ];
 
                         let cuotas = parseInt(document.getElementById('cuotasCantidad').value);
-                        const filtro = cuotasDisponibles.filter((cuota) => cuota >= cuotas);
+                        const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotas);
                         let disponibles = JSON.stringify(filtro);
 
-                        if (cuotas <= 18) {
-
+                        function cuotasFunction() {
                             contenedor.innerHTML = ``;
 
                             let cuotas = document.createElement('div');
                             cuotas.innerHTML = `<div class="titulo subtitulo">
-                        Las cuotas disponibles son ${disponibles}
-                        </div>`;
+                            Las cuotas disponibles en base a su solicitud son: ${disponibles}
+                            </div>
+                            <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
                             contenedor.append(cuotas);
+                        }
 
-                        } else {
+                        cuotas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
 
-                            alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
+                        let finalizar = document.getElementById('finalizar');
+
+                        finalizar.onclick = () => {
+                            contenedor.innerHTML = ``;
+
+                            let fin = document.createElement('div');
+                            fin.innerHTML = `<div class="titulo subtitulo">
+                            Gracias por elegirnos, su préstamo será depositado en su cuenta JavaScript.
+                            </div>`;
+                            contenedor.append(fin);
+
                         }
                     }
                 }
@@ -306,25 +366,54 @@ cliente.onclick = () => {
                     cuotasBoton.onclick = (prevent) => {
 
                         prevent.preventDefault();
-                        const cuotasDisponibles = [1, 3, 6, 9, 12, 18];
+                        const cuotasDisponibles = [
+                            {
+                                cuotas: 1,
+                                totalCadaCuota: resultado
+                            }, {
+                                cuotas: 3,
+                                totalCadaCuota: (resultado / 3)
+                            }, {
+                                cuotas: 6,
+                                totalCadaCuota: (resultado / 6)
+                            }, {
+                                cuotas: 9,
+                                totalCadaCuota: (resultado / 9)
+                            }, {
+                                cuotas: 12,
+                                totalCadaCuota: (resultado / 12)
+                            }
+
+                        ];
 
                         let cuotas = parseInt(document.getElementById('cuotasCantidad').value);
-                        const filtro = cuotasDisponibles.filter((cuota) => cuota >= cuotas);
+                        const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotas);
                         let disponibles = JSON.stringify(filtro);
 
-                        if (cuotas <= 18) {
-
+                        function cuotasFunction() {
                             contenedor.innerHTML = ``;
 
                             let cuotas = document.createElement('div');
                             cuotas.innerHTML = `<div class="titulo subtitulo">
-                        Las cuotas disponibles son ${disponibles}
-                        </div>`;
+                            Las cuotas disponibles en base a su solicitud son: ${disponibles}
+                            </div>
+                            <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
                             contenedor.append(cuotas);
+                        }
 
-                        } else {
+                        cuotas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
 
-                            alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
+                        let finalizar = document.getElementById('finalizar');
+
+                        finalizar.onclick = () => {
+                            contenedor.innerHTML = ``;
+
+                            let fin = document.createElement('div');
+                            fin.innerHTML = `<div class="titulo subtitulo">
+                            Gracias por elegirnos, su préstamo será depositado en su cuenta JavaScript.
+                            </div>`;
+                            contenedor.append(fin);
+
                         }
                     }
                 }
@@ -383,25 +472,54 @@ cliente.onclick = () => {
                     cuotasBoton.onclick = (prevent) => {
 
                         prevent.preventDefault();
-                        const cuotasDisponibles = [1, 3, 6, 9, 12, 18];
+                        const cuotasDisponibles = [
+                            {
+                                cuotas: 1,
+                                totalCadaCuota: resultado
+                            }, {
+                                cuotas: 3,
+                                totalCadaCuota: (resultado / 3)
+                            }, {
+                                cuotas: 6,
+                                totalCadaCuota: (resultado / 6)
+                            }, {
+                                cuotas: 9,
+                                totalCadaCuota: (resultado / 9)
+                            }, {
+                                cuotas: 12,
+                                totalCadaCuota: (resultado / 12)
+                            }
+
+                        ];
 
                         let cuotas = parseInt(document.getElementById('cuotasCantidad').value);
-                        const filtro = cuotasDisponibles.filter((cuota) => cuota >= cuotas);
+                        const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotas);
                         let disponibles = JSON.stringify(filtro);
 
-                        if (cuotas <= 18) {
-
+                        function cuotasFunction() {
                             contenedor.innerHTML = ``;
 
                             let cuotas = document.createElement('div');
                             cuotas.innerHTML = `<div class="titulo subtitulo">
-                        Las cuotas disponibles son ${disponibles}
-                        </div>`;
+                            Las cuotas disponibles en base a su solicitud son: ${disponibles}
+                            </div>
+                            <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
                             contenedor.append(cuotas);
+                        }
 
-                        } else {
+                        cuotas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
 
-                            alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
+                        let finalizar = document.getElementById('finalizar');
+
+                        finalizar.onclick = () => {
+                            contenedor.innerHTML = ``;
+
+                            let fin = document.createElement('div');
+                            fin.innerHTML = `<div class="titulo subtitulo">
+                            Gracias por elegirnos, su préstamo será depositado en su cuenta JavaScript.
+                            </div>`;
+                            contenedor.append(fin);
+
                         }
                     }
                 }
@@ -472,7 +590,9 @@ quieroCliente.onclick = () => {
             contrasenia: contraseniaUsuario,
         }
 
-        alert(usuario.cliente + ' su usuario fue creado con éxito, a continuación le mostramos los planes que podemos ofrecerle:');
+        const { cliente, telefono } = usuario
+
+        alert(cliente + ' su usuario fue creado con éxito, a continuación le mostramos los planes que podemos ofrecerle:');
 
         let section2 = document.getElementById('section2');
         section2.remove();
@@ -508,7 +628,7 @@ quieroCliente.onclick = () => {
 
             let titulo = document.createElement('h3');
             titulo.innerHTML = `<h3 class="titulo">Plan elegido: Básico</h3>
-            <h2 class="subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted al: ${usuario.telefono}. Saludos. </h2>
+            <h2 class="subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted al: ${telefono}. Saludos. </h2>
             <img id="img1" class="img" src="recursos/basico.png" alt="JavaScript">
             `
             contenedor.append(titulo);
@@ -522,7 +642,7 @@ quieroCliente.onclick = () => {
 
             let titulo = document.createElement('h3');
             titulo.innerHTML = `<h3 class="titulo">Plan elegido: Platino</h3>
-            <h2 class="subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted al: ${usuario.telefono}. Saludos. </h2>
+            <h2 class="subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted al: ${telefono}. Saludos. </h2>
             <img id="img1" class="img" src="recursos/platino.png" alt="JavaScript">`
 
             contenedor.append(titulo);
@@ -536,7 +656,7 @@ quieroCliente.onclick = () => {
 
             let titulo = document.createElement('h3');
             titulo.innerHTML = `<h3 class="titulo">Plan elegido: Dorado</h3>
-                <h2 class="subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted al: ${usuario.telefono}. Saludos. </h2>
+                <h2 class="subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted al: ${telefono}. Saludos. </h2>
                 <img id="img1" class="img" src="recursos/dorado.png" alt="JavaScript">`
 
             contenedor.append(titulo);
@@ -550,7 +670,7 @@ quieroCliente.onclick = () => {
 
             let titulo = document.createElement('h3');
             titulo.innerHTML = `<h3 class="titulo">Plan elegido: Black</h3>
-            <h2 class="subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted al: ${usuario.telefono}. Saludos. </h2>
+            <h2 class="subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted al: ${telefono}. Saludos. </h2>
                     <img id="img1" class="img" src="recursos/black.png" alt="JavaScript">`
 
             contenedor.append(titulo);
@@ -636,12 +756,17 @@ noCliente.onclick = (prevent) => {
             let total = document.getElementById('total');
             total.remove();
 
+            const cuotasDisponibles = [1, 3, 6, 9, 12];
+
+            let min = Math.min(...cuotasDisponibles);
+            let max = Math.max(...cuotasDisponibles);
+
             let cuotas = document.createElement('div');
             cuotas.className = 'titulo subtitulo';
             cuotas.innerHTML = `<div id="cuotasId">
             <form class="container" action="#" method="post" id="cuotasId">
             <div class="form">
-            <label for="cuotasCantidad">Por favor ingrese el monto mínimo de cuotas en las cuales le gustaría saldar su deuda:</label>
+            <label for="cuotasCantidad">Sabiendo que la cantidad mínimo de cuotas es ${min} y el máximo ${max} por favor ingrese la cantidad en las cuales le gustaría saldar su deuda:</label>
             <input id="cuotasCantidad" type="text" class="form-control" placeholder="1, 2, 3...">
             <button id="cuotasBoton" type="submit" class="btn btn-primary">Cuotas</button>
             </form>
@@ -654,25 +779,96 @@ noCliente.onclick = (prevent) => {
             cuotasBoton.onclick = (prevent) => {
 
                 prevent.preventDefault();
-                const cuotasDisponibles = [1, 3, 6, 9, 12, 18];
+                const cuotasDisponibles = [
+                    {
+                        cuotas: 1,
+                        totalCadaCuota: resultado
+                    }, {
+                        cuotas: 3,
+                        totalCadaCuota: parseInt(resultado / 3)
+                    }, {
+                        cuotas: 6,
+                        totalCadaCuota: parseInt(resultado / 6)
+                    }, {
+                        cuotas: 9,
+                        totalCadaCuota: parseInt(resultado / 9)
+                    }, {
+                        cuotas: 12,
+                        totalCadaCuota: parseInt(resultado / 12)
+                    }
+
+                ];
 
                 let cuotas = parseInt(document.getElementById('cuotasCantidad').value);
-                const filtro = cuotasDisponibles.filter((cuota) => cuota >= cuotas);
+                const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotas);
                 let disponibles = JSON.stringify(filtro);
 
-                if (cuotas <= 18) {
-
+                function cuotasFunction() {
                     contenedor.innerHTML = ``;
 
                     let cuotas = document.createElement('div');
                     cuotas.innerHTML = `<div class="titulo subtitulo">
-                    Las cuotas disponibles son ${disponibles}
-                    </div>`;
+                    Las cuotas disponibles en base a su solicitud son: ${disponibles}
+                    </div>
+                    <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
                     contenedor.append(cuotas);
+                }
 
-                } else {
+                cuotas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
 
-                    alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
+                let finalizar = document.getElementById('finalizar');
+
+                finalizar.onclick = () => {
+                    contenedor.innerHTML = ``;
+
+                    let fin = document.createElement('div');
+                    fin.innerHTML = `<div class="titulo subtitulo">
+                    Gracias por elegirnos, por favor ingrese los siguientes datos para que un representante se ponga en contacto con usted:
+                    <form class="container" action="#" method="post">
+                    <div class="form">
+                        <label for="nombre">Nombre y apellido:</label>
+                        <input id="nombre" type="text" class="form-control" placeholder="Nombre Apellido">
+                        <label for="telefono">Teléfono:</label>
+                        <input id="telefono" type="number" class="form-control" placeholder="1112345678">
+                        <label for="nombreUsuario">Email</label>
+                        <input id="email" type="email" class="form-control" placeholder="ejempl@gmail.com">
+                        <div>
+                            <button id="contacto" type="submit" class="btn btn-primary">Contactarme</button>
+                        </div>
+                    </div>
+                </form>
+                    </div>`;
+                    contenedor.append(fin);
+
+                    let contactame = document.getElementById('contacto');
+
+                    contactame.onclick = (evento) => {
+
+                        let nombreNoCliente = document.getElementById('nombre').value;
+                        let telefonoNoCliente = document.getElementById('telefono').value;
+                        let emailNoCliente = document.getElementById('email').value;
+                        evento.preventDefault();
+
+                        const datos = {
+                            nombre: nombreNoCliente,
+                            telefono: telefonoNoCliente,
+                            email: emailNoCliente
+                        }
+
+                        let { nombre, telefono, email } = datos
+
+                        contenedor.innerHTML = ``;
+
+                        let contacto = document.createElement('div');
+                        contacto.innerHTML = `
+                        <div class="titulo subtitulo">
+                            <div>${nombre} un represtenate se pondrá en contacto con usted a los medios proporcionados: </div>
+                            <div>Teléfono: ${telefono}</div>
+                            <div>Email: ${email}</div>
+                        </div>`;
+                        contenedor.append(contacto);
+
+                    }
                 }
             }
         }
@@ -700,12 +896,17 @@ noCliente.onclick = (prevent) => {
             let total = document.getElementById('total');
             total.remove();
 
+            const cuotasDisponibles = [1, 3, 6, 9, 12];
+
+            let min = Math.min(...cuotasDisponibles);
+            let max = Math.max(...cuotasDisponibles);
+
             let cuotas = document.createElement('div');
             cuotas.className = 'titulo subtitulo';
             cuotas.innerHTML = `<div id="cuotasId">
             <form class="container" action="#" method="post" id="cuotasId">
             <div class="form">
-            <label for="cuotasCantidad">Por favor ingrese el monto mínimo de cuotas en las cuales le gustaría saldar su deuda:</label>
+            <label for="cuotasCantidad">Sabiendo que la cantidad mínimo de cuotas es ${min} y el máximo ${max} por favor ingrese la cantidad en las cuales le gustaría saldar su deuda:</label>
             <input id="cuotasCantidad" type="text" class="form-control" placeholder="1, 2, 3...">
             <button id="cuotasBoton" type="submit" class="btn btn-primary">Cuotas</button>
             </form>
@@ -718,25 +919,95 @@ noCliente.onclick = (prevent) => {
             cuotasBoton.onclick = (prevent) => {
 
                 prevent.preventDefault();
-                const cuotasDisponibles = [1, 3, 6, 9, 12, 18];
+                const cuotasDisponibles = [
+                    {
+                        cuotas: 1,
+                        totalCadaCuota: resultado
+                    }, {
+                        cuotas: 3,
+                        totalCadaCuota: parseInt(resultado / 3)
+                    }, {
+                        cuotas: 6,
+                        totalCadaCuota: parseInt(resultado / 6)
+                    }, {
+                        cuotas: 9,
+                        totalCadaCuota: parseInt(resultado / 9)
+                    }, {
+                        cuotas: 12,
+                        totalCadaCuota: parseInt(resultado / 12)
+                    }
+
+                ];
 
                 let cuotas = parseInt(document.getElementById('cuotasCantidad').value);
-                const filtro = cuotasDisponibles.filter((cuota) => cuota >= cuotas);
+                const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotas);
                 let disponibles = JSON.stringify(filtro);
 
-                if (cuotas <= 18) {
-
+                function cuotasFunction() {
                     contenedor.innerHTML = ``;
 
                     let cuotas = document.createElement('div');
                     cuotas.innerHTML = `<div class="titulo subtitulo">
-                    Las cuotas disponibles son ${disponibles}
-                    </div>`;
+                    Las cuotas disponibles en base a su solicitud son: ${disponibles}
+                    </div>
+                    <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
                     contenedor.append(cuotas);
+                }
 
-                } else {
+                cuotas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
 
-                    alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
+                let finalizar = document.getElementById('finalizar');
+
+                finalizar.onclick = () => {
+                    contenedor.innerHTML = ``;
+
+                    let fin = document.createElement('div');
+                    fin.innerHTML = `<div class="titulo subtitulo">
+                    Gracias por elegirnos, por favor ingrese los siguientes datos para que un representante se ponga en contacto con usted:
+                    <form class="container" action="#" method="post">
+                    <div class="form">
+                        <label for="nombre">Nombre y apellido:</label>
+                        <input id="nombre" type="text" class="form-control" placeholder="Nombre Apellido">
+                        <label for="telefono">Teléfono:</label>
+                        <input id="telefono" type="number" class="form-control" placeholder="1112345678">
+                        <label for="nombreUsuario">Email</label>
+                        <input id="email" type="email" class="form-control" placeholder="ejempl@gmail.com">
+                        <div>
+                            <button id="contacto" type="submit" class="btn btn-primary">Contactarme</button>
+                        </div>
+                    </div>
+                </form>
+                    </div>`;
+                    contenedor.append(fin);
+
+                    let contactame = document.getElementById('contacto');
+
+                    contactame.onclick = (evento) => {
+
+                        let nombreNoCliente = document.getElementById('nombre').value;
+                        let telefonoNoCliente = document.getElementById('telefono').value;
+                        let emailNoCliente = document.getElementById('email').value;
+                        evento.preventDefault();
+
+                        const datos = {
+                            nombre: nombreNoCliente,
+                            telefono: telefonoNoCliente,
+                            email: emailNoCliente
+                        }
+
+                        let { nombre, telefono, email } = datos
+
+                        contenedor.innerHTML = ``;
+
+                        let contacto = document.createElement('div');
+                        contacto.innerHTML =`
+                        <div class="titulo subtitulo">
+                            <div>${nombre} un represtenate se pondrá en contacto con usted a los medios proporcionados: </div>
+                            <div>Teléfono: ${telefono}</div>
+                            <div>Email: ${email}</div>
+                        </div>`;
+                        contenedor.append(contacto);
+                    }
                 }
             }
         }
@@ -764,12 +1035,17 @@ noCliente.onclick = (prevent) => {
             let total = document.getElementById('total');
             total.remove();
 
+            const cuotasDisponibles = [1, 3, 6, 9, 12];
+
+            let min = Math.min(...cuotasDisponibles);
+            let max = Math.max(...cuotasDisponibles);
+
             let cuotas = document.createElement('div');
             cuotas.className = 'titulo subtitulo';
             cuotas.innerHTML = `<div id="cuotasId">
             <form class="container" action="#" method="post" id="cuotasId">
             <div class="form">
-            <label for="cuotasCantidad">Por favor ingrese el monto mínimo de cuotas en las cuales le gustaría saldar su deuda:</label>
+            <label for="cuotasCantidad">Sabiendo que la cantidad mínimo de cuotas es ${min} y el máximo ${max} por favor ingrese la cantidad en las cuales le gustaría saldar su deuda:</label>
             <input id="cuotasCantidad" type="text" class="form-control" placeholder="1, 2, 3...">
             <button id="cuotasBoton" type="submit" class="btn btn-primary">Cuotas</button>
             </form>
@@ -782,24 +1058,96 @@ noCliente.onclick = (prevent) => {
             cuotasBoton.onclick = (prevent) => {
 
                 prevent.preventDefault();
-                const cuotasDisponibles = [1, 3, 6, 9, 12, 18];
+                const cuotasDisponibles = [
+                    {
+                        cuotas: 1,
+                        totalCadaCuota: resultado
+                    }, {
+                        cuotas: 3,
+                        totalCadaCuota: parseInt(resultado / 3)
+                    }, {
+                        cuotas: 6,
+                        totalCadaCuota: parseInt(resultado / 6)
+                    }, {
+                        cuotas: 9,
+                        totalCadaCuota: parseInt(resultado / 9)
+                    }, {
+                        cuotas: 12,
+                        totalCadaCuota: parseInt(resultado / 12)
+                    }
+
+                ];
 
                 let cuotas = parseInt(document.getElementById('cuotasCantidad').value);
-                const filtro = cuotasDisponibles.filter((cuota) => cuota >= cuotas);
+                const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotas);
                 let disponibles = JSON.stringify(filtro);
-                if (cuotas <= 18) {
 
+                function cuotasFunction() {
                     contenedor.innerHTML = ``;
 
                     let cuotas = document.createElement('div');
                     cuotas.innerHTML = `<div class="titulo subtitulo">
-                    Las cuotas disponibles son ${disponibles}
-                    </div>`;
+                    Las cuotas disponibles en base a su solicitud son: ${disponibles}
+                    </div>
+                    <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
                     contenedor.append(cuotas);
+                }
 
-                } else {
+                cuotas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
 
-                    alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
+                let finalizar = document.getElementById('finalizar');
+
+                finalizar.onclick = () => {
+                    contenedor.innerHTML = ``;
+
+                    let fin = document.createElement('div');
+                    fin.innerHTML = `<div class="titulo subtitulo">
+                    Gracias por elegirnos, por favor ingrese los siguientes datos para que un representante se ponga en contacto con usted:
+                    <form class="container" action="#" method="post">
+                    <div class="form">
+                        <label for="nombre">Nombre y apellido:</label>
+                        <input id="nombre" type="text" class="form-control" placeholder="Nombre Apellido">
+                        <label for="telefono">Teléfono:</label>
+                        <input id="telefono" type="number" class="form-control" placeholder="1112345678">
+                        <label for="nombreUsuario">Email</label>
+                        <input id="email" type="email" class="form-control" placeholder="ejempl@gmail.com">
+                        <div>
+                            <button id="contacto" type="submit" class="btn btn-primary">Contactarme</button>
+                        </div>
+                    </div>
+                </form>
+                    </div>`;
+                    contenedor.append(fin);
+
+                    let contactame = document.getElementById('contacto');
+
+                    contactame.onclick = (evento) => {
+
+                        let nombreNoCliente = document.getElementById('nombre').value;
+                        let telefonoNoCliente = document.getElementById('telefono').value;
+                        let emailNoCliente = document.getElementById('email').value;
+                        evento.preventDefault();
+
+                        const datos = {
+                            nombre: nombreNoCliente,
+                            telefono: telefonoNoCliente,
+                            email: emailNoCliente
+                        }
+
+                        let { nombre, telefono, email } = datos
+
+                        contenedor.innerHTML = ``;
+
+                        let contacto = document.createElement('div');
+                        contacto.innerHTML =`
+                        <div class="titulo subtitulo">
+                            <div>${nombre} un represtenate se pondrá en contacto con usted a los medios proporcionados: </div>
+                            <div>Teléfono: ${telefono}</div>
+                            <div>Email: ${email}</div>
+                        </div>`;
+                        contenedor.append(contacto);
+
+                    }
                 }
             }
         }
@@ -827,12 +1175,17 @@ noCliente.onclick = (prevent) => {
             let total = document.getElementById('total');
             total.remove();
 
+            const cuotasDisponibles = [1, 3, 6, 9, 12];
+
+            let min = Math.min(...cuotasDisponibles);
+            let max = Math.max(...cuotasDisponibles);
+
             let cuotas = document.createElement('div');
             cuotas.className = 'titulo subtitulo';
             cuotas.innerHTML = `<div id="cuotasId">
             <form class="container" action="#" method="post" id="cuotasId">
             <div class="form">
-            <label for="cuotasCantidad">Por favor ingrese el monto mínimo de cuotas en las cuales le gustaría saldar su deuda:</label>
+            <label for="cuotasCantidad">Sabiendo que la cantidad mínimo de cuotas es ${min} y el máximo ${max} por favor ingrese la cantidad en las cuales le gustaría saldar su deuda:</label>
             <input id="cuotasCantidad" type="text" class="form-control" placeholder="1, 2, 3...">
             <button id="cuotasBoton" type="submit" class="btn btn-primary">Cuotas</button>
             </form>
@@ -845,24 +1198,95 @@ noCliente.onclick = (prevent) => {
             cuotasBoton.onclick = (prevent) => {
 
                 prevent.preventDefault();
-                const cuotasDisponibles = [1, 3, 6, 9, 12, 18];
+                const cuotasDisponibles = [
+                    {
+                        cuotas: 1,
+                        totalCadaCuota: resultado
+                    }, {
+                        cuotas: 3,
+                        totalCadaCuota: parseInt(resultado / 3)
+                    }, {
+                        cuotas: 6,
+                        totalCadaCuota: parseInt(resultado / 6)
+                    }, {
+                        cuotas: 9,
+                        totalCadaCuota: parseInt(resultado / 9)
+                    }, {
+                        cuotas: 12,
+                        totalCadaCuota: parseInt(resultado / 12)
+                    }
+
+                ];
 
                 let cuotas = parseInt(document.getElementById('cuotasCantidad').value);
-                const filtro = cuotasDisponibles.filter((cuota) => cuota >= cuotas);
+                const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotas);
                 let disponibles = JSON.stringify(filtro);
-                if (cuotas <= 18) {
 
+                function cuotasFunction() {
                     contenedor.innerHTML = ``;
 
                     let cuotas = document.createElement('div');
                     cuotas.innerHTML = `<div class="titulo subtitulo">
-                    Las cuotas disponibles son ${disponibles}
-                    </div>`;
+                    Las cuotas disponibles en base a su solicitud son: ${disponibles}
+                    </div>
+                    <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
                     contenedor.append(cuotas);
+                }
 
-                } else {
+                cuotas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
 
-                    alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
+                let finalizar = document.getElementById('finalizar');
+
+                finalizar.onclick = () => {
+                    contenedor.innerHTML = ``;
+
+                    let fin = document.createElement('div');
+                    fin.innerHTML = `<div class="titulo subtitulo">
+                    Gracias por elegirnos, por favor ingrese los siguientes datos para que un representante se ponga en contacto con usted:
+                    <form class="container" action="#" method="post">
+                    <div class="form">
+                        <label for="nombre">Nombre y apellido:</label>
+                        <input id="nombre" type="text" class="form-control" placeholder="Nombre Apellido">
+                        <label for="telefono">Teléfono:</label>
+                        <input id="telefono" type="number" class="form-control" placeholder="1112345678">
+                        <label for="nombreUsuario">Email</label>
+                        <input id="email" type="email" class="form-control" placeholder="ejempl@gmail.com">
+                        <div>
+                            <button id="contacto" type="submit" class="btn btn-primary">Contactarme</button>
+                        </div>
+                    </div>
+                </form>
+                    </div>`;
+                    contenedor.append(fin);
+
+                    let contactame = document.getElementById('contacto');
+
+                    contactame.onclick = (evento) => {
+
+                        let nombreNoCliente = document.getElementById('nombre').value;
+                        let telefonoNoCliente = document.getElementById('telefono').value;
+                        let emailNoCliente = document.getElementById('email').value;
+                        evento.preventDefault();
+
+                        const datos = {
+                            nombre: nombreNoCliente,
+                            telefono: telefonoNoCliente,
+                            email: emailNoCliente
+                        }
+
+                        let { nombre, telefono, email } = datos
+
+                        contenedor.innerHTML = ``;
+
+                        let contacto = document.createElement('div');
+                        contacto.innerHTML =`
+                        <div class="titulo subtitulo">
+                            <div>${nombre} un represtenate se pondrá en contacto con usted a los medios proporcionados: </div>
+                            <div>Teléfono: ${telefono}</div>
+                            <div>Email: ${email}</div>
+                        </div>`;
+                        contenedor.append(contacto);
+                    }
                 }
             }
         }

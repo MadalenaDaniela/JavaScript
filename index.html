@@ -36,23 +36,46 @@
     <section id="section1">
       <h2 class="titulo" id="titulo">Bienvenido al simulador de préstamos del banco JavaScript</h2>
       <h3 class="titulo subtitulo" id="subtitulo">¿Es usted cliente de Banco JavaScript?</h3>
-      <div class="titulo subtitulo">
-        <button id="btnSi" type="submit" class="btn btn-primary">Si</button>
+      <div class="tarjetas">
+        <div class="card" style="width: 18rem;">
+          <img src="recursos/soyCliente.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Clientes</h5>
+            <p class="card-text">Préstamos para clientes del banco JavaScript</p>
+            <a id="btnSi" href="#" class="btn btn-primary">Ingresar</a>
+          </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+          <img src="recursos/quieroSerlo.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Quiero ser clientes</h5>
+            <p class="card-text">¿Querés sumarte a nuestra comunidad?</p>
+            <a id="btnQuiero" href="#" class="btn btn-primary">Ingresar</a>
+          </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+          <img src="recursos/noSoy.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">No clientes</h5>
+            <p class="card-text">Préstamos para no-clientes del banco JavaScript</p>
+            <a id="btnNo" href="#" class="btn btn-primary">Ingresar</a>
+          </div>
+        </div>
       </div>
-      <div class="titulo subtitulo">
-        <button id="btnNo" type="submit" class="btn btn-primary">No</button>
-      </div>
-      <div class="titulo subtitulo">
-        <button id="btnQuiero" type="submit" class="btn btn-primary">Quiero serlo</button>
-      </div>
-
     </section>
     <section class="titulo subtitulo" id="contenedor">
       <img id="img" class="img" src="recursos/imagen.jpg" alt="JavaScript">
     </section>
   </main>
   <footer>
-    <p>Todos los derechos reservados</p>
+    <div>
+      <p>Banco JavaScript</p>
+      <p>Todos los derechos reservados</p>
+    </div>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3499.1823495788203!2d77.1281690145615!3d28.714095987136673!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d01aaac75999d%3A0xd66875b15d93c4ab!2sJavaScript%20ik!5e0!3m2!1ses-419!2sar!4v1659836867572!5m2!1ses-419!2sar"
+      width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"></iframe>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"

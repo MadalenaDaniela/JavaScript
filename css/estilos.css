@@ -60,10 +60,25 @@ button {
 }
 
 footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     background-color: rgb(219, 213, 213);
     text-align: center;
-    padding: 6rem;
+    padding: 4rem;
+    align-content: center;
 }
+
+iframe {
+    width: 30vw;
+    height: 25vh;
+}
+
+.tarjetas {
+    display: flex;
+    justify-content: space-around;
+}
+
 
 .img {
     

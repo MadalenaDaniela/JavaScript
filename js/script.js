@@ -69,14 +69,38 @@ cliente.onclick = () => {
                 localStorage.setItem(`contrasenia`, contrasenia);
 
                 const nombreUsuarioLocal = localStorage.getItem('nombre');
-                alert('Su ' + nombreUsuarioLocal + ' ha sido guardado con éxito');
+
+                Toastify({
+                    text: 'Su ' + nombreUsuarioLocal + ' ha sido guardado con éxito',
+                    duration: 5000,
+                    newWindow: true,
+                    offset: {
+                        y: '200%'
+                    },
+                    position: "center",
+                    style: {
+                        background: "#7B68EE",
+                    }
+                }).showToast();
 
             } else {
                 sessionStorage.setItem(`nombre`, usuario);
                 sessionStorage.setItem(`contrasenia`, contrasenia);
 
                 const nombreUsuarioSession = sessionStorage.getItem('nombre');
-                alert('Su ' + nombreUsuarioSession + ' no se ha guardado en este dispositivo');
+                Toastify({
+                    text: 'Su ' + nombreUsuarioSession + ' no se ha guardado en este dispositivo',
+                    duration: 5000,
+                    newWindow: true,
+                    offset: {
+                        y: '200%'
+                    },
+                    position: "center",
+                    stopOnFocus: true,
+                    style: {
+                        background: "#7B68EE",
+                    }
+                }).showToast();
             }
 
             let recarga = document.getElementById('formulario');
@@ -594,7 +618,18 @@ quieroCliente.onclick = () => {
 
         const { cliente, telefono } = usuario
 
-        alert(cliente + ' su usuario fue creado con éxito, a continuación le mostramos los planes que podemos ofrecerle:');
+        Toastify({
+            text: cliente + ' su usuario fue creado con éxito, a continuación le mostramos los planes que podemos ofrecerle',
+            duration: 5000,
+            newWindow: true,
+            offset: {
+                x: '50%',
+                y: '50%'
+            },
+            style: {
+                background: "	#7B68EE",
+            }
+        }).showToast();
 
         let section2 = document.getElementById('section2');
         section2.remove();

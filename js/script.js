@@ -72,7 +72,7 @@ cliente.onclick = () => {
 
                 Toastify({
                     text: 'Su ' + nombreUsuarioLocal + ' ha sido guardado con éxito',
-                    duration: 5000,
+                    duration: 3000,
                     newWindow: true,
                     offset: {
                         y: '200%'
@@ -90,7 +90,7 @@ cliente.onclick = () => {
                 const nombreUsuarioSession = sessionStorage.getItem('nombre');
                 Toastify({
                     text: 'Su ' + nombreUsuarioSession + ' no se ha guardado en este dispositivo',
-                    duration: 5000,
+                    duration: 3000,
                     newWindow: true,
                     offset: {
                         y: '200%'
@@ -207,24 +207,70 @@ cliente.onclick = () => {
                             contenedor.innerHTML = ``;
 
                             let financiacion = document.createElement('div');
-                            financiacion.innerHTML = `<div class="titulo subtitulo">
-                            Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}
-                            </div>
-                            <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
+                            financiacion.innerHTML =  `
+                            <div class="titulo subtitulo">
+                                <h3>Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}.
+                                </h3>
+                                <div class="subtitulo">
+                                Por favor a continuación seleccione su tutor bancario, el mismo se pondrá en contacto con usted. Muchas gracias:
+                                </div>
+                                <div class="container form">
+                                    <select id="select" class="form-select" aria-label="Default select example">
+                                        <option selected>Seleccionar</option>
+                                        <option value="Leanne Graham">Leanne Graham</option>
+                                        <option value="Ervin Howell">Ervin Howell</option>
+                                        <option value="Clementine Bauch">Clementine Bauch</option>
+                                        <option value="Patricia Lebsack">Patricia Lebsack</option>
+                                        <option value="Chelsey Dietrich">Chelsey Dietrich</option>
+                                        <option value="Mrs. Dennis Schulist">Mrs. Dennis Schulist</option>
+                                        <option value="Kurtis Weissnat">Kurtis Weissnat</option>
+                                        <option value="Nicholas Runolfsdottir V">Nicholas Runolfsdottir V</option>
+                                        <option value="Glenna Reichert">Glenna Reichert</option>
+                                        <option value="Clementina DuBuque">Clementina DuBuque</option>
+                                    </select>
+                                 </div>
+                                 <button id="finalizar" type="submit" class="btn btn-primary">Contactarme</button>
+                            </div>`;
                             contenedor.append(financiacion);
                         }
 
                         cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
+                        function filtrar(array) {
+                            let nombre = select.value;
+                            if (!nombre) {
+                                return array;
+                            } else {
+                                return array.filter((item) => item.name == nombre);
+                            }
+                        }
+                        
+                        function crearHtml(array) {
+                            array.forEach(representante => {
+                                const ficha = `
+                                <div class="tarjetas">
+                                    <div class="card" style="width: 20rem;">
+                                         <img src="recursos/representante.jpg" class="card-img-top" alt="...">
+                                         <div class="card-body">
+                                            <h2 class="card-title">${representante.name}</h2>
+                                            <p class="card-text">Email: ${representante.email}</p>
+                                            <p class="card-text">Web Site: ${representante.website}</p>
+                                            <p class="card-text">Teléfono: ${representante.phone}</p>
+                                            <h3 class="card-text">Gracias por elegirnos. Lo contactaremos a la brevedad</h3>
+                                        </div>
+                                    </div>
+                                </div>`
+                                contenedor.innerHTML += ficha
+                            });
+                        }
+
                         let finalizar = document.getElementById('finalizar');
-
                         finalizar.onclick = () => {
-                            contenedor.innerHTML = ``;
 
-                            let fin = document.createElement('div');
-                            fin.innerHTML = `<div class="titulo subtitulo">
-                            Gracias por elegirnos, su préstamo será depositado en su cuenta JavaScript.
-                            </div>`;
-                            contenedor.append(fin);
+                            fetch('https://jsonplaceholder.typicode.com/users')
+                                .then((response) => response.json())
+                                .then((data) => { 
+                                    crearHtml(filtrar(data));
+                                })
 
                         }
                     }
@@ -313,25 +359,70 @@ cliente.onclick = () => {
                             contenedor.innerHTML = ``;
 
                             let financiacion = document.createElement('div');
-                            financiacion.innerHTML = `<div class="titulo subtitulo">
-                            Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}
-                            </div>
-                            <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
+                            financiacion.innerHTML =  `
+                            <div class="titulo subtitulo">
+                                <h3>Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}.
+                                </h3>
+                                <div class="subtitulo">
+                                Por favor a continuación seleccione su tutor bancario, el mismo se pondrá en contacto con usted. Muchas gracias:
+                                </div>
+                                <div class="container form">
+                                    <select id="select" class="form-select" aria-label="Default select example">
+                                        <option selected>Seleccionar</option>
+                                        <option value="Leanne Graham">Leanne Graham</option>
+                                        <option value="Ervin Howell">Ervin Howell</option>
+                                        <option value="Clementine Bauch">Clementine Bauch</option>
+                                        <option value="Patricia Lebsack">Patricia Lebsack</option>
+                                        <option value="Chelsey Dietrich">Chelsey Dietrich</option>
+                                        <option value="Mrs. Dennis Schulist">Mrs. Dennis Schulist</option>
+                                        <option value="Kurtis Weissnat">Kurtis Weissnat</option>
+                                        <option value="Nicholas Runolfsdottir V">Nicholas Runolfsdottir V</option>
+                                        <option value="Glenna Reichert">Glenna Reichert</option>
+                                        <option value="Clementina DuBuque">Clementina DuBuque</option>
+                                    </select>
+                                 </div>
+                                 <button id="finalizar" type="submit" class="btn btn-primary">Contactarme</button>
+                            </div>`;
                             contenedor.append(financiacion);
                         }
 
                         cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
+                        function filtrar(array) {
+                            let nombre = select.value;
+                            if (!nombre) {
+                                return array;
+                            } else {
+                                return array.filter((item) => item.name == nombre);
+                            }
+                        }
+                        
+                        function crearHtml(array) {
+                            array.forEach(representante => {
+                                const ficha = `
+                                <div class="tarjetas">
+                                    <div class="card" style="width: 20rem;">
+                                         <img src="recursos/representante.jpg" class="card-img-top" alt="...">
+                                         <div class="card-body">
+                                            <h2 class="card-title">${representante.name}</h2>
+                                            <p class="card-text">Email: ${representante.email}</p>
+                                            <p class="card-text">Web Site: ${representante.website}</p>
+                                            <p class="card-text">Teléfono: ${representante.phone}</p>
+                                            <h3 class="card-text">Gracias por elegirnos. Lo contactaremos a la brevedad</h3>
+                                        </div>
+                                    </div>
+                                </div>`
+                                contenedor.innerHTML += ficha
+                            });
+                        }
 
                         let finalizar = document.getElementById('finalizar');
-
                         finalizar.onclick = () => {
-                            contenedor.innerHTML = ``;
 
-                            let fin = document.createElement('div');
-                            fin.innerHTML = `<div class="titulo subtitulo">
-                            Gracias por elegirnos, su préstamo será depositado en su cuenta JavaScript.
-                            </div>`;
-                            contenedor.append(fin);
+                            fetch('https://jsonplaceholder.typicode.com/users')
+                                .then((response) => response.json())
+                                .then((data) => { 
+                                    crearHtml(filtrar(data));
+                                })
 
                         }
                     }
@@ -420,25 +511,70 @@ cliente.onclick = () => {
                             contenedor.innerHTML = ``;
 
                             let financiacion = document.createElement('div');
-                            financiacion.innerHTML = `<div class="titulo subtitulo">
-                            Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}
-                            </div>
-                            <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
+                            financiacion.innerHTML =  `
+                            <div class="titulo subtitulo">
+                                <h3>Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}.
+                                </h3>
+                                <div class="subtitulo">
+                                Por favor a continuación seleccione su tutor bancario, el mismo se pondrá en contacto con usted. Muchas gracias:
+                                </div>
+                                <div class="container form">
+                                    <select id="select" class="form-select" aria-label="Default select example">
+                                        <option selected>Seleccionar</option>
+                                        <option value="Leanne Graham">Leanne Graham</option>
+                                        <option value="Ervin Howell">Ervin Howell</option>
+                                        <option value="Clementine Bauch">Clementine Bauch</option>
+                                        <option value="Patricia Lebsack">Patricia Lebsack</option>
+                                        <option value="Chelsey Dietrich">Chelsey Dietrich</option>
+                                        <option value="Mrs. Dennis Schulist">Mrs. Dennis Schulist</option>
+                                        <option value="Kurtis Weissnat">Kurtis Weissnat</option>
+                                        <option value="Nicholas Runolfsdottir V">Nicholas Runolfsdottir V</option>
+                                        <option value="Glenna Reichert">Glenna Reichert</option>
+                                        <option value="Clementina DuBuque">Clementina DuBuque</option>
+                                    </select>
+                                 </div>
+                                 <button id="finalizar" type="submit" class="btn btn-primary">Contactarme</button>
+                            </div>`;
                             contenedor.append(financiacion);
                         }
 
                         cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
+                        function filtrar(array) {
+                            let nombre = select.value;
+                            if (!nombre) {
+                                return array;
+                            } else {
+                                return array.filter((item) => item.name == nombre);
+                            }
+                        }
+                        
+                        function crearHtml(array) {
+                            array.forEach(representante => {
+                                const ficha = `
+                                <div class="tarjetas">
+                                    <div class="card" style="width: 20rem;">
+                                         <img src="recursos/representante.jpg" class="card-img-top" alt="...">
+                                         <div class="card-body">
+                                            <h2 class="card-title">${representante.name}</h2>
+                                            <p class="card-text">Email: ${representante.email}</p>
+                                            <p class="card-text">Web Site: ${representante.website}</p>
+                                            <p class="card-text">Teléfono: ${representante.phone}</p>
+                                            <h3 class="card-text">Gracias por elegirnos. Lo contactaremos a la brevedad</h3>
+                                        </div>
+                                    </div>
+                                </div>`
+                                contenedor.innerHTML += ficha
+                            });
+                        }
 
                         let finalizar = document.getElementById('finalizar');
-
                         finalizar.onclick = () => {
-                            contenedor.innerHTML = ``;
 
-                            let fin = document.createElement('div');
-                            fin.innerHTML = `<div class="titulo subtitulo">
-                            Gracias por elegirnos, su préstamo será depositado en su cuenta JavaScript.
-                            </div>`;
-                            contenedor.append(fin);
+                            fetch('https://jsonplaceholder.typicode.com/users')
+                                .then((response) => response.json())
+                                .then((data) => { 
+                                    crearHtml(filtrar(data));
+                                })
 
                         }
                     }
@@ -526,25 +662,71 @@ cliente.onclick = () => {
                             contenedor.innerHTML = ``;
 
                             let financiacion = document.createElement('div');
-                            financiacion.innerHTML = `<div class="titulo subtitulo">
-                            Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}
-                            </div>
-                            <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
+                            financiacion.innerHTML =  `
+                            <div class="titulo subtitulo">
+                                <h3>Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}.
+                                </h3>
+                                <div class="subtitulo">
+                                Por favor a continuación seleccione su tutor bancario, el mismo se pondrá en contacto con usted. Muchas gracias:
+                                </div>
+                                <div class="container form">
+                                    <select id="select" class="form-select" aria-label="Default select example">
+                                        <option selected>Seleccionar</option>
+                                        <option value="Leanne Graham">Leanne Graham</option>
+                                        <option value="Ervin Howell">Ervin Howell</option>
+                                        <option value="Clementine Bauch">Clementine Bauch</option>
+                                        <option value="Patricia Lebsack">Patricia Lebsack</option>
+                                        <option value="Chelsey Dietrich">Chelsey Dietrich</option>
+                                        <option value="Mrs. Dennis Schulist">Mrs. Dennis Schulist</option>
+                                        <option value="Kurtis Weissnat">Kurtis Weissnat</option>
+                                        <option value="Nicholas Runolfsdottir V">Nicholas Runolfsdottir V</option>
+                                        <option value="Glenna Reichert">Glenna Reichert</option>
+                                        <option value="Clementina DuBuque">Clementina DuBuque</option>
+                                    </select>
+                                 </div>
+                                 <button id="finalizar" type="submit" class="btn btn-primary">Contactarme</button>
+                            </div>`;
                             contenedor.append(financiacion);
                         }
 
                         cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
 
+                        function filtrar(array) {
+                            let nombre = select.value;
+                            if (!nombre) {
+                                return array;
+                            } else {
+                                return array.filter((item) => item.name == nombre);
+                            }
+                        }
+                        
+                        function crearHtml(array) {
+                            array.forEach(representante => {
+                                const ficha = `
+                                <div class="tarjetas">
+                                    <div class="card" style="width: 20rem;">
+                                         <img src="recursos/representante.jpg" class="card-img-top" alt="...">
+                                         <div class="card-body">
+                                            <h2 class="card-title">${representante.name}</h2>
+                                            <p class="card-text">Email: ${representante.email}</p>
+                                            <p class="card-text">Web Site: ${representante.website}</p>
+                                            <p class="card-text">Teléfono: ${representante.phone}</p>
+                                            <h3 class="card-text">Gracias por elegirnos. Lo contactaremos a la brevedad</h3>
+                                        </div>
+                                    </div>
+                                </div>`
+                                contenedor.innerHTML += ficha
+                            });
+                        }
+
                         let finalizar = document.getElementById('finalizar');
-
                         finalizar.onclick = () => {
-                            contenedor.innerHTML = ``;
 
-                            let fin = document.createElement('div');
-                            fin.innerHTML = `<div class="titulo subtitulo">
-                            Gracias por elegirnos, su préstamo será depositado en su cuenta JavaScript.
-                            </div>`;
-                            contenedor.append(fin);
+                            fetch('https://jsonplaceholder.typicode.com/users')
+                                .then((response) => response.json())
+                                .then((data) => { 
+                                    crearHtml(filtrar(data));
+                                })
 
                         }
                     }
@@ -1258,7 +1440,7 @@ noCliente.onclick = (prevent) => {
 
                 ];
 
-                let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
+                const cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
                 const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
                 const disponibleCuota = JSON.stringify(filtro.cuotas);
                 const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);

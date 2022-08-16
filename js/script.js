@@ -227,7 +227,7 @@ cliente.onclick = () => {
                                 </div>
                                 <div class="container form">
                                     <select id="select" class="form-select" aria-label="Default select example">
-                                        <option selected>Seleccionar</option>
+                                        <option value="Selected">Seleccionar</option>
                                         <option value="Leanne Graham">Leanne Graham</option>
                                         <option value="Ervin Howell">Ervin Howell</option>
                                         <option value="Clementine Bauch">Clementine Bauch</option>
@@ -247,8 +247,16 @@ cliente.onclick = () => {
 
                         cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
                         function filtrar(array) {
+                            
                             let nombre = select.value;
-                            if (!nombre) {
+                            if (nombre == "Selected") {
+
+                                contenedor.innerHTML = ``;
+                                let titulo = document.createElement('div');
+                                titulo.innerHTML = `<div id="total"><h3 class="titulo subtitulo">No se hubo selección. En el transcurso del día alguien de nuestro equipo se pondrá en contacto con usted, o si lo desea, aqui le dejamos una lista de nuestros representantes y sus respectivos medios de contacto. Gracias.</div>`
+
+                                contenedor.append(titulo);
+                                
                                 return array;
                             } else {
                                 return array.filter((item) => item.name == nombre);
@@ -260,7 +268,7 @@ cliente.onclick = () => {
                                 const ficha = `
                                 <div class="tarjetas">
                                     <div class="card" style="width: 20rem;">
-                                         <img src="recursos/representante.jpg" class="card-img-top" alt="...">
+                                         <img id="imagenRep" src="recursos/representante.jpg" class="card-img-top" alt="...">
                                          <div class="card-body">
                                             <h2 class="card-title">${representante.name}</h2>
                                             <p class="card-text">Email: ${representante.email}</p>
@@ -358,7 +366,7 @@ cliente.onclick = () => {
                                 </div>
                                 <div class="container form">
                                     <select id="select" class="form-select" aria-label="Default select example">
-                                        <option selected>Seleccionar</option>
+                                        <option value="Selected">Seleccionar</option>
                                         <option value="Leanne Graham">Leanne Graham</option>
                                         <option value="Ervin Howell">Ervin Howell</option>
                                         <option value="Clementine Bauch">Clementine Bauch</option>
@@ -379,7 +387,14 @@ cliente.onclick = () => {
                         cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
                         function filtrar(array) {
                             let nombre = select.value;
-                            if (!nombre) {
+                            if (nombre == "Selected") {
+
+                                contenedor.innerHTML = ``;
+                                let titulo = document.createElement('div');
+                                titulo.innerHTML = `<div id="total"><h3 class="titulo subtitulo">No se hubo selección. En el transcurso del día alguien de nuestro equipo se pondrá en contacto con usted, o si lo desea, aqui le dejamos una lista de nuestros representantes y sus respectivos medios de contacto. Gracias.</div>`
+
+                                contenedor.append(titulo);
+                                
                                 return array;
                             } else {
                                 return array.filter((item) => item.name == nombre);
@@ -488,7 +503,7 @@ cliente.onclick = () => {
                                 </div>
                                 <div class="container form">
                                     <select id="select" class="form-select" aria-label="Default select example">
-                                        <option selected>Seleccionar</option>
+                                        <option value="Selected">Seleccionar</option>
                                         <option value="Leanne Graham">Leanne Graham</option>
                                         <option value="Ervin Howell">Ervin Howell</option>
                                         <option value="Clementine Bauch">Clementine Bauch</option>
@@ -509,7 +524,14 @@ cliente.onclick = () => {
                         cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
                         function filtrar(array) {
                             let nombre = select.value;
-                            if (!nombre) {
+                            if (nombre == "Selected") {
+
+                                contenedor.innerHTML = ``;
+                                let titulo = document.createElement('div');
+                                titulo.innerHTML = `<div id="total"><h3 class="titulo subtitulo">No se hubo selección. En el transcurso del día alguien de nuestro equipo se pondrá en contacto con usted, o si lo desea, aqui le dejamos una lista de nuestros representantes y sus respectivos medios de contacto. Gracias.</div>`
+
+                                contenedor.append(titulo);
+                                
                                 return array;
                             } else {
                                 return array.filter((item) => item.name == nombre);
@@ -617,7 +639,7 @@ cliente.onclick = () => {
                                 </div>
                                 <div class="container form">
                                     <select id="select" class="form-select" aria-label="Default select example">
-                                        <option selected>Seleccionar</option>
+                                        <option value="Selected">Seleccionar</option>
                                         <option value="Leanne Graham">Leanne Graham</option>
                                         <option value="Ervin Howell">Ervin Howell</option>
                                         <option value="Clementine Bauch">Clementine Bauch</option>
@@ -639,7 +661,14 @@ cliente.onclick = () => {
 
                         function filtrar(array) {
                             let nombre = select.value;
-                            if (!nombre) {
+                            if (nombre == "Selected") {
+
+                                contenedor.innerHTML = ``;
+                                let titulo = document.createElement('div');
+                                titulo.innerHTML = `<div id="total"><h3 class="titulo subtitulo">No se hubo selección. En el transcurso del día alguien de nuestro equipo se pondrá en contacto con usted, o si lo desea, aqui le dejamos una lista de nuestros representantes y sus respectivos medios de contacto. Gracias.</div>`
+
+                                contenedor.append(titulo);
+                                
                                 return array;
                             } else {
                                 return array.filter((item) => item.name == nombre);

@@ -124,23 +124,44 @@ cliente.onclick = () => {
 
             contenedor.append(cantidad);
 
-            let uno = document.getElementById('20');
-
-            uno.onclick = () => {
-
+            function limpiar() {
                 let limpiar = document.getElementById('botones');
                 limpiar.remove();
                 let limpiar1 = document.getElementById('section2');
                 limpiar1.remove();
+            }
 
-                let tasaInteres = 8;
+            let tasaInteres = 8;
 
-                function porcentajePrestamo(numeroA, interes) {
+            function porcentajePrestamo(numeroA, interes) {
 
-                    let resultado = (numeroA * interes) / 100 + numeroA;
+                let resultado = (numeroA * interes) / 100 + numeroA;
 
-                    return resultado;
-                }
+                return resultado;
+            }
+
+            function crearIngresoCuotas() {
+
+                let cuotas = document.createElement('div');
+                cuotas.className = 'titulo subtitulo';
+                cuotas.innerHTML = `<div id="cuotasId">
+                    <form class="container" action="#" method="post" id="cuotasId">
+                    <div class="form">
+                    <label for="cuotasCantidad">Por favor ingrese el monto mínimo de cuotas en las cuales le gustaría saldar su deuda:</label>
+                    <input id="cuotasCantidad" type="text" class="form-control" placeholder="1, 2, 3...">
+                    <button id="cuotasBoton" type="submit" class="btn btn-primary">Cuotas</button>
+                    </form>
+                    </div>
+                    </div>`;
+
+                contenedor.prepend(cuotas);
+            }
+
+            let uno = document.getElementById('20');
+
+            uno.onclick = () => {
+
+                limpiar()
 
                 let resultado = porcentajePrestamo(20000, tasaInteres);
 
@@ -159,19 +180,7 @@ cliente.onclick = () => {
                     let total = document.getElementById('total');
                     total.remove();
 
-                    let cuotas = document.createElement('div');
-                    cuotas.className = 'titulo subtitulo';
-                    cuotas.innerHTML = `<div id="cuotasId">
-                    <form class="container" action="#" method="post" id="cuotasId">
-                    <div class="form">
-                    <label for="cuotasCantidad">Por favor ingrese el monto mínimo de cuotas en las cuales le gustaría saldar su deuda:</label>
-                    <input id="cuotasCantidad" type="text" class="form-control" placeholder="1, 2, 3...">
-                    <button id="cuotasBoton" type="submit" class="btn btn-primary">Cuotas</button>
-                    </form>
-                    </div>
-                    </div>`;
-
-                    contenedor.prepend(cuotas);
+                    crearIngresoCuotas()
 
                     let cuotasBoton = document.getElementById('cuotasBoton');
                     cuotasBoton.onclick = (prevent) => {
@@ -200,14 +209,16 @@ cliente.onclick = () => {
 
                         let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
                         const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
-                        const disponibleCuota = JSON.stringify(filtro.cuotas);
-                        const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
 
                         function cuotasFunction() {
+
+                            const disponibleCuota = JSON.stringify(filtro.cuotas);
+                            const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
+
                             contenedor.innerHTML = ``;
 
                             let financiacion = document.createElement('div');
-                            financiacion.innerHTML =  `
+                            financiacion.innerHTML = `
                             <div class="titulo subtitulo">
                                 <h3>Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}.
                                 </h3>
@@ -243,7 +254,7 @@ cliente.onclick = () => {
                                 return array.filter((item) => item.name == nombre);
                             }
                         }
-                        
+
                         function crearHtml(array) {
                             array.forEach(representante => {
                                 const ficha = `
@@ -268,7 +279,7 @@ cliente.onclick = () => {
 
                             fetch('https://jsonplaceholder.typicode.com/users')
                                 .then((response) => response.json())
-                                .then((data) => { 
+                                .then((data) => {
                                     crearHtml(filtrar(data));
                                 })
 
@@ -282,19 +293,7 @@ cliente.onclick = () => {
 
             dos.onclick = () => {
 
-                let limpiar = document.getElementById('botones');
-                limpiar.remove();
-                let limpiar1 = document.getElementById('section2');
-                limpiar1.remove();
-
-                let tasaInteres = 8;
-
-                function porcentajePrestamo(numeroA, interes) {
-
-                    let resultado = (numeroA * interes) / 100 + numeroA;
-
-                    return resultado;
-                }
+                limpiar()
 
                 let resultado = porcentajePrestamo(50000, tasaInteres);
 
@@ -313,19 +312,8 @@ cliente.onclick = () => {
                     let total = document.getElementById('total');
                     total.remove();
 
-                    let cuotas = document.createElement('div');
-                    cuotas.className = 'titulo subtitulo';
-                    cuotas.innerHTML = `<div id="cuotasId">
-                    <form class="container" action="#" method="post" id="cuotasId">
-                    <div class="form">
-                    <label for="cuotasCantidad">Por favor ingrese el monto mínimo de cuotas en las cuales le gustaría saldar su deuda:</label>
-                    <input id="cuotasCantidad" type="text" class="form-control" placeholder="1, 2, 3...">
-                    <button id="cuotasBoton" type="submit" class="btn btn-primary">Cuotas</button>
-                    </form>
-                    </div>
-                    </div>`;
+                    crearIngresoCuotas()
 
-                    contenedor.prepend(cuotas);
                     let cuotasBoton = document.getElementById('cuotasBoton');
                     cuotasBoton.onclick = (prevent) => {
 
@@ -352,14 +340,16 @@ cliente.onclick = () => {
 
                         let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
                         const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
-                        const disponibleCuota = JSON.stringify(filtro.cuotas);
-                        const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
 
                         function cuotasFunction() {
+
+                            const disponibleCuota = JSON.stringify(filtro.cuotas);
+                            const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
+
                             contenedor.innerHTML = ``;
 
                             let financiacion = document.createElement('div');
-                            financiacion.innerHTML =  `
+                            financiacion.innerHTML = `
                             <div class="titulo subtitulo">
                                 <h3>Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}.
                                 </h3>
@@ -395,7 +385,7 @@ cliente.onclick = () => {
                                 return array.filter((item) => item.name == nombre);
                             }
                         }
-                        
+
                         function crearHtml(array) {
                             array.forEach(representante => {
                                 const ficha = `
@@ -420,7 +410,7 @@ cliente.onclick = () => {
 
                             fetch('https://jsonplaceholder.typicode.com/users')
                                 .then((response) => response.json())
-                                .then((data) => { 
+                                .then((data) => {
                                     crearHtml(filtrar(data));
                                 })
 
@@ -433,19 +423,7 @@ cliente.onclick = () => {
 
             tres.onclick = () => {
 
-                let limpiar = document.getElementById('botones');
-                limpiar.remove();
-                let limpiar1 = document.getElementById('section2');
-                limpiar1.remove();
-
-                let tasaInteres = 8;
-
-                function porcentajePrestamo(numeroA, interes) {
-
-                    let resultado = (numeroA * interes) / 100 + numeroA;
-
-                    return resultado;
-                }
+                limpiar()
 
                 let resultado = porcentajePrestamo(80000, tasaInteres);
 
@@ -464,19 +442,7 @@ cliente.onclick = () => {
                     let total = document.getElementById('total');
                     total.remove();
 
-                    let cuotas = document.createElement('div');
-                    cuotas.className = 'titulo subtitulo';
-                    cuotas.innerHTML = `<div id="cuotasId">
-                    <form class="container" action="#" method="post" id="cuotasId">
-                    <div class="form">
-                    <label for="cuotasCantidad">Por favor ingrese el monto mínimo de cuotas en las cuales le gustaría saldar su deuda:</label>
-                    <input id="cuotasCantidad" type="text" class="form-control" placeholder="1, 2, 3...">
-                    <button id="cuotasBoton" type="submit" class="btn btn-primary">Cuotas</button>
-                    </form>
-                    </div>
-                    </div>`;
-
-                    contenedor.prepend(cuotas);
+                    crearIngresoCuotas()
 
                     let cuotasBoton = document.getElementById('cuotasBoton');
                     cuotasBoton.onclick = (prevent) => {
@@ -504,14 +470,16 @@ cliente.onclick = () => {
 
                         let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
                         const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
-                        const disponibleCuota = JSON.stringify(filtro.cuotas);
-                        const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
 
                         function cuotasFunction() {
+
+                            const disponibleCuota = JSON.stringify(filtro.cuotas);
+                            const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
+
                             contenedor.innerHTML = ``;
 
                             let financiacion = document.createElement('div');
-                            financiacion.innerHTML =  `
+                            financiacion.innerHTML = `
                             <div class="titulo subtitulo">
                                 <h3>Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}.
                                 </h3>
@@ -547,7 +515,7 @@ cliente.onclick = () => {
                                 return array.filter((item) => item.name == nombre);
                             }
                         }
-                        
+
                         function crearHtml(array) {
                             array.forEach(representante => {
                                 const ficha = `
@@ -572,7 +540,7 @@ cliente.onclick = () => {
 
                             fetch('https://jsonplaceholder.typicode.com/users')
                                 .then((response) => response.json())
-                                .then((data) => { 
+                                .then((data) => {
                                     crearHtml(filtrar(data));
                                 })
 
@@ -585,19 +553,7 @@ cliente.onclick = () => {
 
             cuatro.onclick = () => {
 
-                let limpiar = document.getElementById('botones');
-                limpiar.remove();
-                let limpiar1 = document.getElementById('section2');
-                limpiar1.remove();
-
-                let tasaInteres = 8;
-
-                function porcentajePrestamo(numeroA, interes) {
-
-                    let resultado = (numeroA * interes) / 100 + numeroA;
-
-                    return resultado;
-                }
+                limpiar()
 
                 let resultado = porcentajePrestamo(100000, tasaInteres);
 
@@ -616,19 +572,7 @@ cliente.onclick = () => {
                     let total = document.getElementById('total');
                     total.remove();
 
-                    let cuotas = document.createElement('div');
-                    cuotas.className = 'titulo subtitulo';
-                    cuotas.innerHTML = `<div id="cuotasId">
-                    <form class="container" action="#" method="post" id="cuotasId">
-                    <div class="form">
-                    <label for="cuotasCantidad">Por favor ingrese el monto mínimo de cuotas en las cuales le gustaría saldar su deuda:</label>
-                    <input id="cuotasCantidad" type="text" class="form-control" placeholder="1, 2, 3...">
-                    <button id="cuotasBoton" type="submit" class="btn btn-primary">Cuotas</button>
-                    </form>
-                    </div>
-                    </div>`;
-
-                    contenedor.prepend(cuotas);
+                    crearIngresoCuotas()
 
                     let cuotasBoton = document.getElementById('cuotasBoton');
                     cuotasBoton.onclick = (prevent) => {
@@ -655,14 +599,16 @@ cliente.onclick = () => {
                         ];
                         let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
                         const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
-                        const disponibleCuota = JSON.stringify(filtro.cuotas);
-                        const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
 
                         function cuotasFunction() {
+
+                            const disponibleCuota = JSON.stringify(filtro.cuotas);
+                            const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
+
                             contenedor.innerHTML = ``;
 
                             let financiacion = document.createElement('div');
-                            financiacion.innerHTML =  `
+                            financiacion.innerHTML = `
                             <div class="titulo subtitulo">
                                 <h3>Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}.
                                 </h3>
@@ -699,7 +645,7 @@ cliente.onclick = () => {
                                 return array.filter((item) => item.name == nombre);
                             }
                         }
-                        
+
                         function crearHtml(array) {
                             array.forEach(representante => {
                                 const ficha = `
@@ -724,7 +670,7 @@ cliente.onclick = () => {
 
                             fetch('https://jsonplaceholder.typicode.com/users')
                                 .then((response) => response.json())
-                                .then((data) => { 
+                                .then((data) => {
                                     crearHtml(filtrar(data));
                                 })
 
@@ -948,6 +894,27 @@ noCliente.onclick = (prevent) => {
 
     contenedor.prepend(titulo);
 
+    function minMax (){
+        const cuotasDisponibles = [1, 3, 6, 9, 12];
+
+            let min = Math.min(...cuotasDisponibles);
+            let max = Math.max(...cuotasDisponibles);
+
+            let cuotas = document.createElement('div');
+            cuotas.className = 'titulo subtitulo';
+            cuotas.innerHTML = `<div id="cuotasId">
+            <form class="container" action="#" method="post" id="cuotasId">
+            <div class="form">
+            <label for="cuotasCantidad">Sabiendo que la cantidad mínimo de cuotas es ${min} y el máximo ${max} por favor ingrese la cantidad en las cuales le gustaría saldar su deuda:</label>
+            <input id="cuotasCantidad" type="text" class="form-control" placeholder="1, 2, 3...">
+            <button id="cuotasBoton" type="submit" class="btn btn-primary">Cuotas</button>
+            </form>
+            </div>
+            </div>`;
+
+            contenedor.prepend(cuotas);
+    }
+
     let radio = document.getElementById('radio');
     let radio1 = document.getElementById('radio1');
     let radio2 = document.getElementById('radio2');
@@ -975,24 +942,7 @@ noCliente.onclick = (prevent) => {
             let total = document.getElementById('total');
             total.remove();
 
-            const cuotasDisponibles = [1, 3, 6, 9, 12];
-
-            let min = Math.min(...cuotasDisponibles);
-            let max = Math.max(...cuotasDisponibles);
-
-            let cuotas = document.createElement('div');
-            cuotas.className = 'titulo subtitulo';
-            cuotas.innerHTML = `<div id="cuotasId">
-            <form class="container" action="#" method="post" id="cuotasId">
-            <div class="form">
-            <label for="cuotasCantidad">Sabiendo que la cantidad mínimo de cuotas es ${min} y el máximo ${max} por favor ingrese la cantidad en las cuales le gustaría saldar su deuda:</label>
-            <input id="cuotasCantidad" type="text" class="form-control" placeholder="1, 2, 3...">
-            <button id="cuotasBoton" type="submit" class="btn btn-primary">Cuotas</button>
-            </form>
-            </div>
-            </div>`;
-
-            contenedor.prepend(cuotas);
+            minMax()
 
             let cuotasBoton = document.getElementById('cuotasBoton');
             cuotasBoton.onclick = (prevent) => {
@@ -1020,10 +970,12 @@ noCliente.onclick = (prevent) => {
 
                 let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
                 const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
-                const disponibleCuota = JSON.stringify(filtro.cuotas);
-                const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
 
                 function cuotasFunction() {
+
+                    const disponibleCuota = JSON.stringify(filtro.cuotas);
+                    const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
+
                     contenedor.innerHTML = ``;
 
                     let financiacion = document.createElement('div');
@@ -1116,24 +1068,7 @@ noCliente.onclick = (prevent) => {
             let total = document.getElementById('total');
             total.remove();
 
-            const cuotasDisponibles = [1, 3, 6, 9, 12];
-
-            let min = Math.min(...cuotasDisponibles);
-            let max = Math.max(...cuotasDisponibles);
-
-            let cuotas = document.createElement('div');
-            cuotas.className = 'titulo subtitulo';
-            cuotas.innerHTML = `<div id="cuotasId">
-            <form class="container" action="#" method="post" id="cuotasId">
-            <div class="form">
-            <label for="cuotasCantidad">Sabiendo que la cantidad mínimo de cuotas es ${min} y el máximo ${max} por favor ingrese la cantidad en las cuales le gustaría saldar su deuda:</label>
-            <input id="cuotasCantidad" type="text" class="form-control" placeholder="1, 2, 3...">
-            <button id="cuotasBoton" type="submit" class="btn btn-primary">Cuotas</button>
-            </form>
-            </div>
-            </div>`;
-
-            contenedor.prepend(cuotas);
+            minMax()
 
             let cuotasBoton = document.getElementById('cuotasBoton');
             cuotasBoton.onclick = (prevent) => {
@@ -1161,10 +1096,12 @@ noCliente.onclick = (prevent) => {
 
                 let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
                 const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
-                const disponibleCuota = JSON.stringify(filtro.cuotas);
-                const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
 
                 function cuotasFunction() {
+
+                    const disponibleCuota = JSON.stringify(filtro.cuotas);
+                    const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
+
                     contenedor.innerHTML = ``;
 
                     let financiacion = document.createElement('div');
@@ -1256,24 +1193,7 @@ noCliente.onclick = (prevent) => {
             let total = document.getElementById('total');
             total.remove();
 
-            const cuotasDisponibles = [1, 3, 6, 9, 12];
-
-            let min = Math.min(...cuotasDisponibles);
-            let max = Math.max(...cuotasDisponibles);
-
-            let cuotas = document.createElement('div');
-            cuotas.className = 'titulo subtitulo';
-            cuotas.innerHTML = `<div id="cuotasId">
-            <form class="container" action="#" method="post" id="cuotasId">
-            <div class="form">
-            <label for="cuotasCantidad">Sabiendo que la cantidad mínimo de cuotas es ${min} y el máximo ${max} por favor ingrese la cantidad en las cuales le gustaría saldar su deuda:</label>
-            <input id="cuotasCantidad" type="text" class="form-control" placeholder="1, 2, 3...">
-            <button id="cuotasBoton" type="submit" class="btn btn-primary">Cuotas</button>
-            </form>
-            </div>
-            </div>`;
-
-            contenedor.prepend(cuotas);
+            minMax()
 
             let cuotasBoton = document.getElementById('cuotasBoton');
             cuotasBoton.onclick = (prevent) => {
@@ -1301,10 +1221,11 @@ noCliente.onclick = (prevent) => {
 
                 let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
                 const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
-                const disponibleCuota = JSON.stringify(filtro.cuotas);
-                const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
 
                 function cuotasFunction() {
+                    const disponibleCuota = JSON.stringify(filtro.cuotas);
+                    const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
+
                     contenedor.innerHTML = ``;
 
                     let financiacion = document.createElement('div');
@@ -1397,24 +1318,7 @@ noCliente.onclick = (prevent) => {
             let total = document.getElementById('total');
             total.remove();
 
-            const cuotasDisponibles = [1, 3, 6, 9, 12];
-
-            let min = Math.min(...cuotasDisponibles);
-            let max = Math.max(...cuotasDisponibles);
-
-            let cuotas = document.createElement('div');
-            cuotas.className = 'titulo subtitulo';
-            cuotas.innerHTML = `<div id="cuotasId">
-            <form class="container" action="#" method="post" id="cuotasId">
-            <div class="form">
-            <label for="cuotasCantidad">Sabiendo que la cantidad mínimo de cuotas es ${min} y el máximo ${max} por favor ingrese la cantidad en las cuales le gustaría saldar su deuda:</label>
-            <input id="cuotasCantidad" type="text" class="form-control" placeholder="1, 2, 3...">
-            <button id="cuotasBoton" type="submit" class="btn btn-primary">Cuotas</button>
-            </form>
-            </div>
-            </div>`;
-
-            contenedor.prepend(cuotas);
+            minMax()
 
             let cuotasBoton = document.getElementById('cuotasBoton');
             cuotasBoton.onclick = (prevent) => {
@@ -1442,10 +1346,12 @@ noCliente.onclick = (prevent) => {
 
                 const cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
                 const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
-                const disponibleCuota = JSON.stringify(filtro.cuotas);
-                const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
 
                 function cuotasFunction() {
+
+                    const disponibleCuota = JSON.stringify(filtro.cuotas);
+                    const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
+
                     contenedor.innerHTML = ``;
 
                     let financiacion = document.createElement('div');

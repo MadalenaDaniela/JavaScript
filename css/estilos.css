@@ -11,8 +11,8 @@ body {
 .header {
     background-image: url(../recursos/portada1.jpg);
     background-size: cover;
-    padding: 10rem;
-    font-size: 1.8rem;
+    padding: 12rem;
+    font-size: 3rem;
     text-align: center;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
@@ -25,12 +25,12 @@ main{
     font-family: Georgia, 'Times New Roman', Times, serif;
     padding: 1rem;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.9rem;
 }
 
 .subtitulo {
     font-size: 1.2rem;
-    padding: 1rem;
+    padding: 1.4rem;
 }
 
 form {
@@ -77,16 +77,23 @@ iframe {
 .tarjetas {
     display: flex;
     justify-content: space-around;
-    padding: 3px;
+    padding: 3rem;
     
 }
 
-
 .img {
+    
+    width: 70vw;
+    height: auto;
+    padding: 2rem;
+    
+}
+
+.imgTarjeta {
     
     width: 50vw;
     height: auto;
-    border-radius: 2rem;
+    padding: 1rem;
     
 }
 

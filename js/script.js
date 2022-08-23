@@ -116,10 +116,10 @@ cliente.onclick = () => {
 
             cantidad = document.createElement('div');
             cantidad.innerHTML = `<div id="botones"  class="titulo subtitulo">
-            <button id="20" type="submit" class="btn btn-primary">$20000</button>
-            <button id="50" type="submit" class="btn btn-primary">$50000</button>
-            <button id="80" type="submit" class="btn btn-primary">$80000</button>
-            <button id="100" type="submit" class="btn btn-primary">$100000</button>
+            <button id="20" type="submit" value="20000" class="prestamo btn btn-primary">$20000</button>
+            <button id="50" type="submit" value="50000" class="prestamo btn btn-primary">$50000</button>
+            <button id="80" type="submit" value="80000" class="prestamo btn btn-primary">$80000</button>
+            <button id="100" type="submit" value="100000" class="prestamo btn btn-primary">$100000</button>
             </div>`;
 
             contenedor.append(cantidad);
@@ -157,555 +157,148 @@ cliente.onclick = () => {
                 contenedor.prepend(cuotas);
             }
 
-            let uno = document.getElementById('20');
 
-            uno.onclick = () => {
+            let seleccion = document.getElementsByClassName('prestamo');
+            for (let boton of seleccion) {
+                boton.addEventListener('click', (valor) => {
 
-                limpiar()
+                    limpiar()
 
-                let resultado = porcentajePrestamo(20000, tasaInteres);
 
-                let contenedor = document.getElementById('contenedor');
+                    let seleccionado = valor.target.value;
+                    let resultado = porcentajePrestamo(parseInt(seleccionado), tasaInteres);
 
-                let titulo = document.createElement('div');
-                titulo.innerHTML = `<div id="total"><h3 class="titulo subtitulo">Su total a pagar será de ${resultado}</h3>
+                    let contenedor = document.getElementById('contenedor');
+
+                    let titulo = document.createElement('div');
+                    titulo.innerHTML = `<div id="total"><h3 class="titulo subtitulo">Su total a pagar será de $${resultado}</h3>
                 <button id="cuotas" type="submit" class="btn btn-primary">Cuotas</button></div>`
 
-                contenedor.append(titulo);
+                    contenedor.append(titulo);
 
-                let botonCuotas = document.getElementById('cuotas');
+                    let botonCuotas = document.getElementById('cuotas');
 
-                botonCuotas.onclick = () => {
+                    botonCuotas.onclick = () => {
 
-                    let total = document.getElementById('total');
-                    total.remove();
+                        let total = document.getElementById('total');
+                        total.remove();
 
-                    crearIngresoCuotas()
+                        crearIngresoCuotas()
 
-                    let cuotasBoton = document.getElementById('cuotasBoton');
-                    cuotasBoton.onclick = (prevent) => {
+                        let cuotasBoton = document.getElementById('cuotasBoton');
 
-                        prevent.preventDefault();
+                        cuotasBoton.onclick = (prevent) => {
 
-                        const cuotasDisponibles = [
-                            {
-                                cuotas: 1,
-                                totalCadaCuota: resultado
-                            }, {
-                                cuotas: 3,
-                                totalCadaCuota: (resultado / 3)
-                            }, {
-                                cuotas: 6,
-                                totalCadaCuota: (resultado / 6)
-                            }, {
-                                cuotas: 9,
-                                totalCadaCuota: (resultado / 9)
-                            }, {
-                                cuotas: 12,
-                                totalCadaCuota: (resultado / 12)
-                            }
+                            prevent.preventDefault();
 
-                        ];
+                            const cuotasDisponibles = [
+                                {
+                                    cuotas: 1,
+                                    totalCadaCuota: resultado
+                                }, {
+                                    cuotas: 3,
+                                    totalCadaCuota: (resultado / 3)
+                                }, {
+                                    cuotas: 6,
+                                    totalCadaCuota: (resultado / 6)
+                                }, {
+                                    cuotas: 9,
+                                    totalCadaCuota: (resultado / 9)
+                                }, {
+                                    cuotas: 12,
+                                    totalCadaCuota: (resultado / 12)
+                                }
 
-                        let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
-                        const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
+                            ];
 
-                        function cuotasFunction() {
+                            let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
+                            const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
 
-                            const disponibleCuota = JSON.stringify(filtro.cuotas);
-                            const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
+                            function cuotasFunction() {
 
-                            contenedor.innerHTML = ``;
-
-                            let financiacion = document.createElement('div');
-                            financiacion.innerHTML = `
-                            <div class="titulo subtitulo">
-                                <h3>Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}.
-                                </h3>
-                                <div class="subtitulo">
-                                Por favor a continuación seleccione su tutor bancario, el mismo se pondrá en contacto con usted. Muchas gracias:
-                                </div>
-                                <div class="container form">
-                                    <select id="select" class="form-select" aria-label="Default select example">
-                                        <option value="Selected">Seleccionar</option>
-                                        <option value="Leanne Graham">Leanne Graham</option>
-                                        <option value="Ervin Howell">Ervin Howell</option>
-                                        <option value="Clementine Bauch">Clementine Bauch</option>
-                                        <option value="Patricia Lebsack">Patricia Lebsack</option>
-                                        <option value="Chelsey Dietrich">Chelsey Dietrich</option>
-                                        <option value="Mrs. Dennis Schulist">Mrs. Dennis Schulist</option>
-                                        <option value="Kurtis Weissnat">Kurtis Weissnat</option>
-                                        <option value="Nicholas Runolfsdottir V">Nicholas Runolfsdottir V</option>
-                                        <option value="Glenna Reichert">Glenna Reichert</option>
-                                        <option value="Clementina DuBuque">Clementina DuBuque</option>
-                                    </select>
-                                 </div>
-                                 <button id="finalizar" type="submit" class="btn btn-primary">Contactarme</button>
-                            </div>`;
-                            contenedor.append(financiacion);
-                        }
-
-                        cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
-                        function filtrar(array) {
-                            
-                            let nombre = select.value;
-                            if (nombre == "Selected") {
+                                const disponibleCuota = JSON.stringify(filtro.cuotas);
+                                const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
 
                                 contenedor.innerHTML = ``;
-                                let titulo = document.createElement('div');
-                                titulo.innerHTML = `<div id="total"><h3 class="titulo subtitulo">No se hubo selección. En el transcurso del día alguien de nuestro equipo se pondrá en contacto con usted, o si lo desea, aqui le dejamos una lista de nuestros representantes y sus respectivos medios de contacto. Gracias.</div>`
 
-                                contenedor.append(titulo);
-                                
-                                return array;
-                            } else {
-                                return array.filter((item) => item.name == nombre);
-                            }
-                        }
-
-                        function crearHtml(array) {
-                            array.forEach(representante => {
-                                const ficha = `
-                                <div class="tarjetas">
-                                    <div class="card" style="width: 20rem;">
-                                         <img id="imagenRep" src="recursos/representante.jpg" class="card-img-top" alt="...">
-                                         <div class="card-body">
-                                            <h2 class="card-title">${representante.name}</h2>
-                                            <p class="card-text">Email: ${representante.email}</p>
-                                            <p class="card-text">Web Site: ${representante.website}</p>
-                                            <p class="card-text">Teléfono: ${representante.phone}</p>
-                                            <h3 class="card-text">Gracias por elegirnos. Lo contactaremos a la brevedad</h3>
-                                        </div>
+                                let financiacion = document.createElement('div');
+                                financiacion.innerHTML = `
+                                <div class="titulo subtitulo">
+                                    <h3>Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}.
+                                    </h3>
+                                    <div class="subtitulo">
+                                    Por favor a continuación seleccione su tutor bancario, el mismo se pondrá en contacto con usted. Muchas gracias:
                                     </div>
-                                </div>`
-                                contenedor.innerHTML += ficha
-                            });
-                        }
+                                    <div class="container form">
+                                        <select id="select" class="form-select" aria-label="Default select example">
+                                            <option value="Selected">Seleccionar</option>
+                                            <option value="Leanne Graham">Leanne Graham</option>
+                                            <option value="Ervin Howell">Ervin Howell</option>
+                                            <option value="Clementine Bauch">Clementine Bauch</option>
+                                            <option value="Patricia Lebsack">Patricia Lebsack</option>
+                                            <option value="Chelsey Dietrich">Chelsey Dietrich</option>
+                                            <option value="Mrs. Dennis Schulist">Mrs. Dennis Schulist</option>
+                                            <option value="Kurtis Weissnat">Kurtis Weissnat</option>
+                                            <option value="Nicholas Runolfsdottir V">Nicholas Runolfsdottir V</option>
+                                            <option value="Glenna Reichert">Glenna Reichert</option>
+                                            <option value="Clementina DuBuque">Clementina DuBuque</option>
+                                        </select>
+                                     </div>
+                                     <button id="finalizar" type="submit" class="btn btn-primary">Contactarme</button>
+                                </div>`;
+                                contenedor.append(financiacion);
+                            }
 
-                        let finalizar = document.getElementById('finalizar');
-                        finalizar.onclick = () => {
+                            cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
+                            function filtrar(array) {
 
-                            fetch('https://jsonplaceholder.typicode.com/users')
-                                .then((response) => response.json())
-                                .then((data) => {
-                                    crearHtml(filtrar(data));
-                                })
+                                let nombre = select.value;
+                                if (nombre == "Selected") {
 
+                                    contenedor.innerHTML = ``;
+                                    let titulo = document.createElement('div');
+                                    titulo.innerHTML = `<div id="total"><h3 class="titulo subtitulo">No hubo selección. En el transcurso del día alguien de nuestro equipo se pondrá en contacto con usted, o si lo desea, aquí dejamos una lista de nuestros representantes y sus respectivos medios de contacto a su disposición. Gracias.</div>`
+
+                                    contenedor.append(titulo);
+
+                                    return array;
+                                } else {
+                                    contenedor.innerHTML = ``;
+                                    return array.filter((item) => item.name == nombre);
+                                }
+                            }
+
+                            function crearHtml(array) {
+                                array.forEach(representante => {
+                                    const ficha = `
+                                    <div class="tarjetas">
+                                        <div class="card" style="width: 20rem;">
+                                             <img src="recursos/representante.jpg" class="card-img-top" alt="representante">
+                                             <div class="card-body">
+                                                <h2 class="card-title">${representante.name}</h2>
+                                                <p class="card-text">Email: ${representante.email}</p>
+                                                <p class="card-text">Web Site: ${representante.website}</p>
+                                                <p class="card-text">Teléfono: ${representante.phone}</p>
+                                                <h3 class="card-text">Gracias por elegirnos. Lo contactaremos a la brevedad</h3>
+                                            </div>
+                                        </div>
+                                    </div>`
+                                    contenedor.innerHTML += ficha
+                                });
+                            }
+
+                            let finalizar = document.getElementById('finalizar');
+                            finalizar.onclick = () => {
+
+                                fetch('https://jsonplaceholder.typicode.com/users')
+                                    .then((response) => response.json())
+                                    .then((data) => {
+                                        crearHtml(filtrar(data));
+                                    })
+                            }
                         }
                     }
-                }
-
-            }
-
-            let dos = document.getElementById('50');
-
-            dos.onclick = () => {
-
-                limpiar()
-
-                let resultado = porcentajePrestamo(50000, tasaInteres);
-
-                let contenedor = document.getElementById('contenedor');
-
-                let titulo = document.createElement('h3');
-                titulo.innerHTML = `<div id="total"><h3 class="titulo subtitulo">Su total a pagar será de ${resultado}</h3>
-                <button id="cuotas" type="submit" class="btn btn-primary">Cuotas</button></div>`
-
-                contenedor.append(titulo);
-
-                let botonCuotas = document.getElementById('cuotas');
-
-                botonCuotas.onclick = () => {
-
-                    let total = document.getElementById('total');
-                    total.remove();
-
-                    crearIngresoCuotas()
-
-                    let cuotasBoton = document.getElementById('cuotasBoton');
-                    cuotasBoton.onclick = (prevent) => {
-
-                        prevent.preventDefault();
-                        const cuotasDisponibles = [
-                            {
-                                cuotas: 1,
-                                totalCadaCuota: resultado
-                            }, {
-                                cuotas: 3,
-                                totalCadaCuota: (resultado / 3)
-                            }, {
-                                cuotas: 6,
-                                totalCadaCuota: (resultado / 6)
-                            }, {
-                                cuotas: 9,
-                                totalCadaCuota: (resultado / 9)
-                            }, {
-                                cuotas: 12,
-                                totalCadaCuota: (resultado / 12)
-                            }
-
-                        ];
-
-                        let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
-                        const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
-
-                        function cuotasFunction() {
-
-                            const disponibleCuota = JSON.stringify(filtro.cuotas);
-                            const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
-
-                            contenedor.innerHTML = ``;
-
-                            let financiacion = document.createElement('div');
-                            financiacion.innerHTML = `
-                            <div class="titulo subtitulo">
-                                <h3>Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}.
-                                </h3>
-                                <div class="subtitulo">
-                                Por favor a continuación seleccione su tutor bancario, el mismo se pondrá en contacto con usted. Muchas gracias:
-                                </div>
-                                <div class="container form">
-                                    <select id="select" class="form-select" aria-label="Default select example">
-                                        <option value="Selected">Seleccionar</option>
-                                        <option value="Leanne Graham">Leanne Graham</option>
-                                        <option value="Ervin Howell">Ervin Howell</option>
-                                        <option value="Clementine Bauch">Clementine Bauch</option>
-                                        <option value="Patricia Lebsack">Patricia Lebsack</option>
-                                        <option value="Chelsey Dietrich">Chelsey Dietrich</option>
-                                        <option value="Mrs. Dennis Schulist">Mrs. Dennis Schulist</option>
-                                        <option value="Kurtis Weissnat">Kurtis Weissnat</option>
-                                        <option value="Nicholas Runolfsdottir V">Nicholas Runolfsdottir V</option>
-                                        <option value="Glenna Reichert">Glenna Reichert</option>
-                                        <option value="Clementina DuBuque">Clementina DuBuque</option>
-                                    </select>
-                                 </div>
-                                 <button id="finalizar" type="submit" class="btn btn-primary">Contactarme</button>
-                            </div>`;
-                            contenedor.append(financiacion);
-                        }
-
-                        cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
-                        function filtrar(array) {
-                            let nombre = select.value;
-                            if (nombre == "Selected") {
-
-                                contenedor.innerHTML = ``;
-                                let titulo = document.createElement('div');
-                                titulo.innerHTML = `<div id="total"><h3 class="titulo subtitulo">No se hubo selección. En el transcurso del día alguien de nuestro equipo se pondrá en contacto con usted, o si lo desea, aqui le dejamos una lista de nuestros representantes y sus respectivos medios de contacto. Gracias.</div>`
-
-                                contenedor.append(titulo);
-                                
-                                return array;
-                            } else {
-                                return array.filter((item) => item.name == nombre);
-                            }
-                        }
-
-                        function crearHtml(array) {
-                            array.forEach(representante => {
-                                const ficha = `
-                                <div class="tarjetas">
-                                    <div class="card" style="width: 20rem;">
-                                         <img src="recursos/representante.jpg" class="card-img-top" alt="...">
-                                         <div class="card-body">
-                                            <h2 class="card-title">${representante.name}</h2>
-                                            <p class="card-text">Email: ${representante.email}</p>
-                                            <p class="card-text">Web Site: ${representante.website}</p>
-                                            <p class="card-text">Teléfono: ${representante.phone}</p>
-                                            <h3 class="card-text">Gracias por elegirnos. Lo contactaremos a la brevedad</h3>
-                                        </div>
-                                    </div>
-                                </div>`
-                                contenedor.innerHTML += ficha
-                            });
-                        }
-
-                        let finalizar = document.getElementById('finalizar');
-                        finalizar.onclick = () => {
-
-                            fetch('https://jsonplaceholder.typicode.com/users')
-                                .then((response) => response.json())
-                                .then((data) => {
-                                    crearHtml(filtrar(data));
-                                })
-
-                        }
-                    }
-                }
-            }
-
-            let tres = document.getElementById('80');
-
-            tres.onclick = () => {
-
-                limpiar()
-
-                let resultado = porcentajePrestamo(80000, tasaInteres);
-
-                let contenedor = document.getElementById('contenedor');
-
-                let titulo = document.createElement('h3');
-                titulo.innerHTML = `<div id="total"><h3 class="titulo subtitulo">Su total a pagar será de ${resultado}</h3>
-                <button id="cuotas" type="submit" class="btn btn-primary">Cuotas</button></div>`
-
-                contenedor.append(titulo);
-
-                let botonCuotas = document.getElementById('cuotas');
-
-                botonCuotas.onclick = () => {
-
-                    let total = document.getElementById('total');
-                    total.remove();
-
-                    crearIngresoCuotas()
-
-                    let cuotasBoton = document.getElementById('cuotasBoton');
-                    cuotasBoton.onclick = (prevent) => {
-
-                        prevent.preventDefault();
-                        const cuotasDisponibles = [
-                            {
-                                cuotas: 1,
-                                totalCadaCuota: resultado
-                            }, {
-                                cuotas: 3,
-                                totalCadaCuota: (resultado / 3)
-                            }, {
-                                cuotas: 6,
-                                totalCadaCuota: (resultado / 6)
-                            }, {
-                                cuotas: 9,
-                                totalCadaCuota: (resultado / 9)
-                            }, {
-                                cuotas: 12,
-                                totalCadaCuota: (resultado / 12)
-                            }
-
-                        ];
-
-                        let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
-                        const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
-
-                        function cuotasFunction() {
-
-                            const disponibleCuota = JSON.stringify(filtro.cuotas);
-                            const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
-
-                            contenedor.innerHTML = ``;
-
-                            let financiacion = document.createElement('div');
-                            financiacion.innerHTML = `
-                            <div class="titulo subtitulo">
-                                <h3>Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}.
-                                </h3>
-                                <div class="subtitulo">
-                                Por favor a continuación seleccione su tutor bancario, el mismo se pondrá en contacto con usted. Muchas gracias:
-                                </div>
-                                <div class="container form">
-                                    <select id="select" class="form-select" aria-label="Default select example">
-                                        <option value="Selected">Seleccionar</option>
-                                        <option value="Leanne Graham">Leanne Graham</option>
-                                        <option value="Ervin Howell">Ervin Howell</option>
-                                        <option value="Clementine Bauch">Clementine Bauch</option>
-                                        <option value="Patricia Lebsack">Patricia Lebsack</option>
-                                        <option value="Chelsey Dietrich">Chelsey Dietrich</option>
-                                        <option value="Mrs. Dennis Schulist">Mrs. Dennis Schulist</option>
-                                        <option value="Kurtis Weissnat">Kurtis Weissnat</option>
-                                        <option value="Nicholas Runolfsdottir V">Nicholas Runolfsdottir V</option>
-                                        <option value="Glenna Reichert">Glenna Reichert</option>
-                                        <option value="Clementina DuBuque">Clementina DuBuque</option>
-                                    </select>
-                                 </div>
-                                 <button id="finalizar" type="submit" class="btn btn-primary">Contactarme</button>
-                            </div>`;
-                            contenedor.append(financiacion);
-                        }
-
-                        cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
-                        function filtrar(array) {
-                            let nombre = select.value;
-                            if (nombre == "Selected") {
-
-                                contenedor.innerHTML = ``;
-                                let titulo = document.createElement('div');
-                                titulo.innerHTML = `<div id="total"><h3 class="titulo subtitulo">No se hubo selección. En el transcurso del día alguien de nuestro equipo se pondrá en contacto con usted, o si lo desea, aqui le dejamos una lista de nuestros representantes y sus respectivos medios de contacto. Gracias.</div>`
-
-                                contenedor.append(titulo);
-                                
-                                return array;
-                            } else {
-                                return array.filter((item) => item.name == nombre);
-                            }
-                        }
-
-                        function crearHtml(array) {
-                            array.forEach(representante => {
-                                const ficha = `
-                                <div class="tarjetas">
-                                    <div class="card" style="width: 20rem;">
-                                         <img src="recursos/representante.jpg" class="card-img-top" alt="...">
-                                         <div class="card-body">
-                                            <h2 class="card-title">${representante.name}</h2>
-                                            <p class="card-text">Email: ${representante.email}</p>
-                                            <p class="card-text">Web Site: ${representante.website}</p>
-                                            <p class="card-text">Teléfono: ${representante.phone}</p>
-                                            <h3 class="card-text">Gracias por elegirnos. Lo contactaremos a la brevedad</h3>
-                                        </div>
-                                    </div>
-                                </div>`
-                                contenedor.innerHTML += ficha
-                            });
-                        }
-
-                        let finalizar = document.getElementById('finalizar');
-                        finalizar.onclick = () => {
-
-                            fetch('https://jsonplaceholder.typicode.com/users')
-                                .then((response) => response.json())
-                                .then((data) => {
-                                    crearHtml(filtrar(data));
-                                })
-
-                        }
-                    }
-                }
-            }
-
-            let cuatro = document.getElementById('100');
-
-            cuatro.onclick = () => {
-
-                limpiar()
-
-                let resultado = porcentajePrestamo(100000, tasaInteres);
-
-                let contenedor = document.getElementById('contenedor');
-
-                let titulo = document.createElement('h3');
-                titulo.innerHTML = `<div id="total"><h3 class="titulo subtitulo">Su total a pagar será de ${resultado}</h3>
-                <button id="cuotas" type="submit" class="btn btn-primary">Cuotas</button></div>`
-
-                contenedor.append(titulo);
-
-                let botonCuotas = document.getElementById('cuotas');
-
-                botonCuotas.onclick = () => {
-
-                    let total = document.getElementById('total');
-                    total.remove();
-
-                    crearIngresoCuotas()
-
-                    let cuotasBoton = document.getElementById('cuotasBoton');
-                    cuotasBoton.onclick = (prevent) => {
-
-                        prevent.preventDefault();
-                        const cuotasDisponibles = [
-                            {
-                                cuotas: 1,
-                                totalCadaCuota: resultado
-                            }, {
-                                cuotas: 3,
-                                totalCadaCuota: (resultado / 3)
-                            }, {
-                                cuotas: 6,
-                                totalCadaCuota: (resultado / 6)
-                            }, {
-                                cuotas: 9,
-                                totalCadaCuota: (resultado / 9)
-                            }, {
-                                cuotas: 12,
-                                totalCadaCuota: (resultado / 12)
-                            }
-
-                        ];
-                        let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
-                        const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
-
-                        function cuotasFunction() {
-
-                            const disponibleCuota = JSON.stringify(filtro.cuotas);
-                            const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
-
-                            contenedor.innerHTML = ``;
-
-                            let financiacion = document.createElement('div');
-                            financiacion.innerHTML = `
-                            <div class="titulo subtitulo">
-                                <h3>Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}.
-                                </h3>
-                                <div class="subtitulo">
-                                Por favor a continuación seleccione su tutor bancario, el mismo se pondrá en contacto con usted. Muchas gracias:
-                                </div>
-                                <div class="container form">
-                                    <select id="select" class="form-select" aria-label="Default select example">
-                                        <option value="Selected">Seleccionar</option>
-                                        <option value="Leanne Graham">Leanne Graham</option>
-                                        <option value="Ervin Howell">Ervin Howell</option>
-                                        <option value="Clementine Bauch">Clementine Bauch</option>
-                                        <option value="Patricia Lebsack">Patricia Lebsack</option>
-                                        <option value="Chelsey Dietrich">Chelsey Dietrich</option>
-                                        <option value="Mrs. Dennis Schulist">Mrs. Dennis Schulist</option>
-                                        <option value="Kurtis Weissnat">Kurtis Weissnat</option>
-                                        <option value="Nicholas Runolfsdottir V">Nicholas Runolfsdottir V</option>
-                                        <option value="Glenna Reichert">Glenna Reichert</option>
-                                        <option value="Clementina DuBuque">Clementina DuBuque</option>
-                                    </select>
-                                 </div>
-                                 <button id="finalizar" type="submit" class="btn btn-primary">Contactarme</button>
-                            </div>`;
-                            contenedor.append(financiacion);
-                        }
-
-                        cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
-
-                        function filtrar(array) {
-                            let nombre = select.value;
-                            if (nombre == "Selected") {
-
-                                contenedor.innerHTML = ``;
-                                let titulo = document.createElement('div');
-                                titulo.innerHTML = `<div id="total"><h3 class="titulo subtitulo">No se hubo selección. En el transcurso del día alguien de nuestro equipo se pondrá en contacto con usted, o si lo desea, aqui le dejamos una lista de nuestros representantes y sus respectivos medios de contacto. Gracias.</div>`
-
-                                contenedor.append(titulo);
-                                
-                                return array;
-                            } else {
-                                return array.filter((item) => item.name == nombre);
-                            }
-                        }
-
-                        function crearHtml(array) {
-                            array.forEach(representante => {
-                                const ficha = `
-                                <div class="tarjetas">
-                                    <div class="card" style="width: 20rem;">
-                                         <img src="recursos/representante.jpg" class="card-img-top" alt="...">
-                                         <div class="card-body">
-                                            <h2 class="card-title">${representante.name}</h2>
-                                            <p class="card-text">Email: ${representante.email}</p>
-                                            <p class="card-text">Web Site: ${representante.website}</p>
-                                            <p class="card-text">Teléfono: ${representante.phone}</p>
-                                            <h3 class="card-text">Gracias por elegirnos. Lo contactaremos a la brevedad</h3>
-                                        </div>
-                                    </div>
-                                </div>`
-                                contenedor.innerHTML += ficha
-                            });
-                        }
-
-                        let finalizar = document.getElementById('finalizar');
-                        finalizar.onclick = () => {
-
-                            fetch('https://jsonplaceholder.typicode.com/users')
-                                .then((response) => response.json())
-                                .then((data) => {
-                                    crearHtml(filtrar(data));
-                                })
-
-                        }
-                    }
-                }
+                })
             }
 
         } else {
@@ -823,7 +416,7 @@ quieroCliente.onclick = () => {
             let titulo = document.createElement('h3');
             titulo.innerHTML = `<h3 class="titulo">Plan elegido: Básico</h3>
             <h2 class="subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted al: ${telefono}. Saludos. </h2>
-            <img id="img1" class="img" src="recursos/basico.png" alt="JavaScript">
+            <img id="img1" class="imgTarjeta" src="recursos/basico.png" alt="JavaScript">
             `
             contenedor.append(titulo);
         }
@@ -837,7 +430,7 @@ quieroCliente.onclick = () => {
             let titulo = document.createElement('h3');
             titulo.innerHTML = `<h3 class="titulo">Plan elegido: Platino</h3>
             <h2 class="subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted al: ${telefono}. Saludos. </h2>
-            <img id="img1" class="img" src="recursos/platino.png" alt="JavaScript">`
+            <img id="img1" class="imgTarjeta" src="recursos/platino.png" alt="JavaScript">`
 
             contenedor.append(titulo);
         }
@@ -851,7 +444,7 @@ quieroCliente.onclick = () => {
             let titulo = document.createElement('h3');
             titulo.innerHTML = `<h3 class="titulo">Plan elegido: Dorado</h3>
                 <h2 class="subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted al: ${telefono}. Saludos. </h2>
-                <img id="img1" class="img" src="recursos/dorado.png" alt="JavaScript">`
+                <img id="img1" class="imgTarjeta" src="recursos/dorado.png" alt="JavaScript">`
 
             contenedor.append(titulo);
         }
@@ -865,7 +458,7 @@ quieroCliente.onclick = () => {
             let titulo = document.createElement('h3');
             titulo.innerHTML = `<h3 class="titulo">Plan elegido: Black</h3>
             <h2 class="subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted al: ${telefono}. Saludos. </h2>
-                    <img id="img1" class="img" src="recursos/black.png" alt="JavaScript">`
+                    <img id="img1" class="imgTarjeta" src="recursos/black.png" alt="JavaScript">`
 
             contenedor.append(titulo);
         }
@@ -873,6 +466,7 @@ quieroCliente.onclick = () => {
 }
 
 noCliente.onclick = (prevent) => {
+    
     prevent.preventDefault();
 
     let section = document.getElementById('section1');
@@ -895,25 +489,25 @@ noCliente.onclick = (prevent) => {
     <h3 class="titulo subtitulo">La tasa de interés para no-clientes es del 10%. Por favor elija entre los valores que podemos ofrecerle:</h3>
             <form class="container" action="#" method="post" id="cuotasId">
             <div class="form-check">
-            <input class="form-check-input input" type="radio" name="flexRadioDefault" id="radio">
+            <input value="20000" class="form-check-input radio" type="radio" name="flexRadioDefault">
             <label class="form-check-label" for="radio">
               $20000
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="radio1">
+            <input value="50000" class="form-check-input radio" type="radio" name="flexRadioDefault">
             <label class="form-check-label" for="radio2">
               $50000
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="radio2">
+            <input value="80000" class="form-check-input radio" type="radio" name="flexRadioDefault">
             <label class="form-check-label" for="radio3">
               $80000
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="radio3">
+            <input value="100000" class="form-check-input radio" type="radio" name="flexRadioDefault">
             <label class="form-check-label" for="radio3">
               $1000000
             </label>
@@ -923,15 +517,17 @@ noCliente.onclick = (prevent) => {
 
     contenedor.prepend(titulo);
 
-    function minMax (){
+    function minMax() {
+        
         const cuotasDisponibles = [1, 3, 6, 9, 12];
 
-            let min = Math.min(...cuotasDisponibles);
-            let max = Math.max(...cuotasDisponibles);
+        let min = Math.min(...cuotasDisponibles);
+        
+        let max = Math.max(...cuotasDisponibles);
 
-            let cuotas = document.createElement('div');
-            cuotas.className = 'titulo subtitulo';
-            cuotas.innerHTML = `<div id="cuotasId">
+        let cuotas = document.createElement('div');
+        cuotas.className = 'titulo subtitulo';
+        cuotas.innerHTML = `<div id="cuotasId">
             <form class="container" action="#" method="post" id="cuotasId">
             <div class="form">
             <label for="cuotasCantidad">Sabiendo que la cantidad mínimo de cuotas es ${min} y el máximo ${max} por favor ingrese la cantidad en las cuales le gustaría saldar su deuda:</label>
@@ -941,513 +537,138 @@ noCliente.onclick = (prevent) => {
             </div>
             </div>`;
 
-            contenedor.prepend(cuotas);
+        contenedor.prepend(cuotas);
     }
 
-    let radio = document.getElementById('radio');
-    let radio1 = document.getElementById('radio1');
-    let radio2 = document.getElementById('radio2');
-    let radio3 = document.getElementById('radio3');
+    let radioButtons = document.getElementsByClassName('radio');
+    
+    for (let button of radioButtons) {
+        
+        button.addEventListener('click', (valor) => {
 
-    radio.onclick = () => {
+            let radioNoCliente = document.getElementById('radioNoCliente');
+            radioNoCliente.remove();
+            let seleccionado = valor.target.value;
+            let resultado = porcentajePrestamo(parseInt(seleccionado), tasaInteres);
 
-        let radioNoCliente = document.getElementById('radioNoCliente');
-        radioNoCliente.remove();
+            let contenedor = document.getElementById('contenedor');
 
-        let resultado = porcentajePrestamo(20000, tasaInteres);
+            let titulo = document.createElement('div');
+            titulo.innerHTML = `<div  id="total"><h3 class="titulo subtitulo">Su total a pagar será de $${resultado}</h3>
+            <button id="cuotas" type="submit" class="btn btn-primary">Cuotas</button></div>`
 
-        let contenedor = document.getElementById('contenedor');
+            contenedor.append(titulo);
 
-        let titulo = document.createElement('div');
-        titulo.innerHTML = `<div  id="total"><h3 class="titulo subtitulo">Su total a pagar será de ${resultado}</h3>
-        <button id="cuotas" type="submit" class="btn btn-primary">Cuotas</button></div>`
+            let botonCuotas = document.getElementById('cuotas');
 
-        contenedor.append(titulo);
+            botonCuotas.onclick = () => {
 
-        let botonCuotas = document.getElementById('cuotas');
+                let total = document.getElementById('total');
+                total.remove();
 
-        botonCuotas.onclick = () => {
+                minMax()
 
-            let total = document.getElementById('total');
-            total.remove();
+                let cuotasBoton = document.getElementById('cuotasBoton');
+                cuotasBoton.onclick = (prevent) => {
 
-            minMax()
-
-            let cuotasBoton = document.getElementById('cuotasBoton');
-            cuotasBoton.onclick = (prevent) => {
-
-                prevent.preventDefault();
-                const cuotasDisponibles = [
-                    {
-                        cuotas: 1,
-                        totalCadaCuota: resultado
-                    }, {
-                        cuotas: 3,
-                        totalCadaCuota: parseInt(resultado / 3)
-                    }, {
-                        cuotas: 6,
-                        totalCadaCuota: parseInt(resultado / 6)
-                    }, {
-                        cuotas: 9,
-                        totalCadaCuota: parseInt(resultado / 9)
-                    }, {
-                        cuotas: 12,
-                        totalCadaCuota: parseInt(resultado / 12)
-                    }
-
-                ];
-
-                let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
-                const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
-
-                function cuotasFunction() {
-
-                    const disponibleCuota = JSON.stringify(filtro.cuotas);
-                    const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
-
-                    contenedor.innerHTML = ``;
-
-                    let financiacion = document.createElement('div');
-                    financiacion.innerHTML = `<div class="titulo subtitulo">
-                            Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}
-                            </div>
-                            <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
-                    contenedor.append(financiacion);
-                }
-
-                cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
-
-                let finalizar = document.getElementById('finalizar');
-
-                finalizar.onclick = () => {
-                    contenedor.innerHTML = ``;
-
-                    let fin = document.createElement('div');
-                    fin.innerHTML = `<div class="titulo subtitulo">
-                    Gracias por elegirnos, por favor ingrese los siguientes datos para que un representante se ponga en contacto con usted:
-                    <form class="container" action="#" method="post">
-                    <div class="form">
-                        <label for="nombre">Nombre y apellido:</label>
-                        <input id="nombre" type="text" class="form-control" placeholder="Nombre Apellido">
-                        <label for="telefono">Teléfono:</label>
-                        <input id="telefono" type="number" class="form-control" placeholder="1112345678">
-                        <label for="nombreUsuario">Email</label>
-                        <input id="email" type="email" class="form-control" placeholder="ejempl@gmail.com">
-                        <div>
-                            <button id="contacto" type="submit" class="btn btn-primary">Contactarme</button>
-                        </div>
-                    </div>
-                </form>
-                    </div>`;
-                    contenedor.append(fin);
-
-                    let contactame = document.getElementById('contacto');
-
-                    contactame.onclick = (evento) => {
-
-                        let nombreNoCliente = document.getElementById('nombre').value;
-                        let telefonoNoCliente = document.getElementById('telefono').value;
-                        let emailNoCliente = document.getElementById('email').value;
-                        evento.preventDefault();
-
-                        const datos = {
-                            nombre: nombreNoCliente,
-                            telefono: telefonoNoCliente,
-                            email: emailNoCliente
+                    prevent.preventDefault();
+                    const cuotasDisponibles = [
+                        {
+                            cuotas: 1,
+                            totalCadaCuota: resultado
+                        }, {
+                            cuotas: 3,
+                            totalCadaCuota: parseInt(resultado / 3)
+                        }, {
+                            cuotas: 6,
+                            totalCadaCuota: parseInt(resultado / 6)
+                        }, {
+                            cuotas: 9,
+                            totalCadaCuota: parseInt(resultado / 9)
+                        }, {
+                            cuotas: 12,
+                            totalCadaCuota: parseInt(resultado / 12)
                         }
 
-                        let { nombre, telefono, email } = datos
+                    ];
+
+                    let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
+                    const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
+
+                    function cuotasFunction() {
+
+                        const disponibleCuota = JSON.stringify(filtro.cuotas);
+                        const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
 
                         contenedor.innerHTML = ``;
 
-                        let contacto = document.createElement('div');
-                        contacto.innerHTML = `
-                        <div class="titulo subtitulo">
-                            <div>${nombre} un represtenate se pondrá en contacto con usted a los medios proporcionados: </div>
-                            <div>Teléfono: ${telefono}</div>
-                            <div>Email: ${email}</div>
-                        </div>`;
-                        contenedor.append(contacto);
-
-                    }
-                }
-            }
-        }
-    }
-
-    radio1.onclick = () => {
-
-        let radioNoCliente = document.getElementById('radioNoCliente');
-        radioNoCliente.remove();
-
-        let resultado = porcentajePrestamo(50000, tasaInteres);
-
-        let contenedor = document.getElementById('contenedor');
-
-        let titulo = document.createElement('div');
-        titulo.innerHTML = `<div  id="total"><h3 class="titulo subtitulo">Su total a pagar será de ${resultado}</h3>
-        <button id="cuotas" type="submit" class="btn btn-primary">Cuotas</button></div>`
-
-        contenedor.append(titulo);
-
-        let botonCuotas = document.getElementById('cuotas');
-
-        botonCuotas.onclick = () => {
-
-            let total = document.getElementById('total');
-            total.remove();
-
-            minMax()
-
-            let cuotasBoton = document.getElementById('cuotasBoton');
-            cuotasBoton.onclick = (prevent) => {
-
-                prevent.preventDefault();
-                const cuotasDisponibles = [
-                    {
-                        cuotas: 1,
-                        totalCadaCuota: resultado
-                    }, {
-                        cuotas: 3,
-                        totalCadaCuota: parseInt(resultado / 3)
-                    }, {
-                        cuotas: 6,
-                        totalCadaCuota: parseInt(resultado / 6)
-                    }, {
-                        cuotas: 9,
-                        totalCadaCuota: parseInt(resultado / 9)
-                    }, {
-                        cuotas: 12,
-                        totalCadaCuota: parseInt(resultado / 12)
+                        let financiacion = document.createElement('div');
+                        financiacion.innerHTML = `<div class="titulo subtitulo">
+                                Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}
+                                </div>
+                                <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
+                        contenedor.append(financiacion);
                     }
 
-                ];
+                    cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
 
-                let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
-                const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
+                    let finalizar = document.getElementById('finalizar');
 
-                function cuotasFunction() {
-
-                    const disponibleCuota = JSON.stringify(filtro.cuotas);
-                    const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
-
-                    contenedor.innerHTML = ``;
-
-                    let financiacion = document.createElement('div');
-                    financiacion.innerHTML = `<div class="titulo subtitulo">
-                            Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}
-                            </div>
-                            <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
-                    contenedor.append(financiacion);
-                }
-
-                cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
-
-                let finalizar = document.getElementById('finalizar');
-
-                finalizar.onclick = () => {
-                    contenedor.innerHTML = ``;
-
-                    let fin = document.createElement('div');
-                    fin.innerHTML = `<div class="titulo subtitulo">
-                    Gracias por elegirnos, por favor ingrese los siguientes datos para que un representante se ponga en contacto con usted:
-                    <form class="container" action="#" method="post">
-                    <div class="form">
-                        <label for="nombre">Nombre y apellido:</label>
-                        <input id="nombre" type="text" class="form-control" placeholder="Nombre Apellido">
-                        <label for="telefono">Teléfono:</label>
-                        <input id="telefono" type="number" class="form-control" placeholder="1112345678">
-                        <label for="nombreUsuario">Email</label>
-                        <input id="email" type="email" class="form-control" placeholder="ejempl@gmail.com">
-                        <div>
-                            <button id="contacto" type="submit" class="btn btn-primary">Contactarme</button>
-                        </div>
-                    </div>
-                </form>
-                    </div>`;
-                    contenedor.append(fin);
-
-                    let contactame = document.getElementById('contacto');
-
-                    contactame.onclick = (evento) => {
-
-                        let nombreNoCliente = document.getElementById('nombre').value;
-                        let telefonoNoCliente = document.getElementById('telefono').value;
-                        let emailNoCliente = document.getElementById('email').value;
-                        evento.preventDefault();
-
-                        const datos = {
-                            nombre: nombreNoCliente,
-                            telefono: telefonoNoCliente,
-                            email: emailNoCliente
-                        }
-
-                        let { nombre, telefono, email } = datos
-
+                    finalizar.onclick = () => {
                         contenedor.innerHTML = ``;
 
-                        let contacto = document.createElement('div');
-                        contacto.innerHTML = `
-                        <div class="titulo subtitulo">
-                            <div>${nombre} un represtenate se pondrá en contacto con usted a los medios proporcionados: </div>
-                            <div>Teléfono: ${telefono}</div>
-                            <div>Email: ${email}</div>
-                        </div>`;
-                        contenedor.append(contacto);
-                    }
-                }
-            }
-        }
-    }
-
-    radio2.onclick = () => {
-
-        let radioNoCliente = document.getElementById('radioNoCliente');
-        radioNoCliente.remove();
-
-        let resultado = porcentajePrestamo(80000, tasaInteres);
-
-        let contenedor = document.getElementById('contenedor');
-
-        let titulo = document.createElement('h3');
-        titulo.innerHTML = `<div  id="total"><h3 class="titulo subtitulo">Su total a pagar será de ${resultado}</h3>
-        <button id="cuotas" type="submit" class="btn btn-primary">Cuotas</button></div>`
-
-        contenedor.append(titulo);
-
-        let botonCuotas = document.getElementById('cuotas');
-
-        botonCuotas.onclick = () => {
-
-            let total = document.getElementById('total');
-            total.remove();
-
-            minMax()
-
-            let cuotasBoton = document.getElementById('cuotasBoton');
-            cuotasBoton.onclick = (prevent) => {
-
-                prevent.preventDefault();
-                const cuotasDisponibles = [
-                    {
-                        cuotas: 1,
-                        totalCadaCuota: resultado
-                    }, {
-                        cuotas: 3,
-                        totalCadaCuota: parseInt(resultado / 3)
-                    }, {
-                        cuotas: 6,
-                        totalCadaCuota: parseInt(resultado / 6)
-                    }, {
-                        cuotas: 9,
-                        totalCadaCuota: parseInt(resultado / 9)
-                    }, {
-                        cuotas: 12,
-                        totalCadaCuota: parseInt(resultado / 12)
-                    }
-
-                ];
-
-                let cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
-                const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
-
-                function cuotasFunction() {
-                    const disponibleCuota = JSON.stringify(filtro.cuotas);
-                    const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
-
-                    contenedor.innerHTML = ``;
-
-                    let financiacion = document.createElement('div');
-                    financiacion.innerHTML = `<div class="titulo subtitulo">
-                            Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}
+                        let fin = document.createElement('div');
+                        fin.innerHTML = `<div class="titulo subtitulo">
+                        Gracias por elegirnos, por favor ingrese los siguientes datos para que un representante se ponga en contacto con usted:
+                        <form class="container" action="#" method="post">
+                        <div class="form">
+                            <label for="nombre">Nombre y apellido:</label>
+                            <input id="nombre" type="text" class="form-control" placeholder="Nombre Apellido">
+                            <label for="telefono">Teléfono:</label>
+                            <input id="telefono" type="number" class="form-control" placeholder="1112345678">
+                            <label for="nombreUsuario">Email</label>
+                            <input id="email" type="email" class="form-control" placeholder="ejempl@gmail.com">
+                            <div>
+                                <button id="contacto" type="submit" class="btn btn-primary">Contactarme</button>
                             </div>
-                            <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
-                    contenedor.append(financiacion);
-                }
-
-                cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
-
-                let finalizar = document.getElementById('finalizar');
-
-                finalizar.onclick = () => {
-                    contenedor.innerHTML = ``;
-
-                    let fin = document.createElement('div');
-                    fin.innerHTML = `<div class="titulo subtitulo">
-                    Gracias por elegirnos, por favor ingrese los siguientes datos para que un representante se ponga en contacto con usted:
-                    <form class="container" action="#" method="post">
-                    <div class="form">
-                        <label for="nombre">Nombre y apellido:</label>
-                        <input id="nombre" type="text" class="form-control" placeholder="Nombre Apellido">
-                        <label for="telefono">Teléfono:</label>
-                        <input id="telefono" type="number" class="form-control" placeholder="1112345678">
-                        <label for="nombreUsuario">Email</label>
-                        <input id="email" type="email" class="form-control" placeholder="ejempl@gmail.com">
-                        <div>
-                            <button id="contacto" type="submit" class="btn btn-primary">Contactarme</button>
                         </div>
-                    </div>
-                </form>
-                    </div>`;
-                    contenedor.append(fin);
-
-                    let contactame = document.getElementById('contacto');
-
-                    contactame.onclick = (evento) => {
-
-                        let nombreNoCliente = document.getElementById('nombre').value;
-                        let telefonoNoCliente = document.getElementById('telefono').value;
-                        let emailNoCliente = document.getElementById('email').value;
-                        evento.preventDefault();
-
-                        const datos = {
-                            nombre: nombreNoCliente,
-                            telefono: telefonoNoCliente,
-                            email: emailNoCliente
-                        }
-
-                        let { nombre, telefono, email } = datos
-
-                        contenedor.innerHTML = ``;
-
-                        let contacto = document.createElement('div');
-                        contacto.innerHTML = `
-                        <div class="titulo subtitulo">
-                            <div>${nombre} un represtenate se pondrá en contacto con usted a los medios proporcionados: </div>
-                            <div>Teléfono: ${telefono}</div>
-                            <div>Email: ${email}</div>
+                    </form>
                         </div>`;
-                        contenedor.append(contacto);
+                        contenedor.append(fin);
 
+                        let contactame = document.getElementById('contacto');
+
+                        contactame.onclick = (evento) => {
+
+                            let nombreNoCliente = document.getElementById('nombre').value;
+                            let telefonoNoCliente = document.getElementById('telefono').value;
+                            let emailNoCliente = document.getElementById('email').value;
+                            evento.preventDefault();
+
+                            const datos = {
+                                nombre: nombreNoCliente,
+                                telefono: telefonoNoCliente,
+                                email: emailNoCliente
+                            }
+
+                            let { nombre, telefono, email } = datos
+
+                            contenedor.innerHTML = ``;
+
+                            let contacto = document.createElement('div');
+                            contacto.innerHTML = `
+                            <div class="titulo subtitulo">
+                                <div>${nombre} un represtenate se pondrá en contacto con usted a los medios proporcionados: </div>
+                                <div>Teléfono: ${telefono}</div>
+                                <div>Email: ${email}</div>
+                            </div>`;
+                            contenedor.append(contacto);
+
+                        }
                     }
                 }
             }
-        }
-    }
-
-    radio3.onclick = () => {
-
-        let radioNoCliente = document.getElementById('radioNoCliente');
-        radioNoCliente.remove();
-
-        let resultado = porcentajePrestamo(100000, tasaInteres);
-
-        let contenedor = document.getElementById('contenedor');
-
-        let titulo = document.createElement('h3');
-        titulo.innerHTML = `<div  id="total"><h3 class="titulo subtitulo">Su total a pagar será de ${resultado}</h3>
-        <button id="cuotas" type="submit" class="btn btn-primary">Cuotas</button></div>`
-
-        contenedor.append(titulo);
-
-        let botonCuotas = document.getElementById('cuotas');
-
-        botonCuotas.onclick = () => {
-
-            let total = document.getElementById('total');
-            total.remove();
-
-            minMax()
-
-            let cuotasBoton = document.getElementById('cuotasBoton');
-            cuotasBoton.onclick = (prevent) => {
-
-                prevent.preventDefault();
-                const cuotasDisponibles = [
-                    {
-                        cuotas: 1,
-                        totalCadaCuota: resultado
-                    }, {
-                        cuotas: 3,
-                        totalCadaCuota: parseInt(resultado / 3)
-                    }, {
-                        cuotas: 6,
-                        totalCadaCuota: parseInt(resultado / 6)
-                    }, {
-                        cuotas: 9,
-                        totalCadaCuota: parseInt(resultado / 9)
-                    }, {
-                        cuotas: 12,
-                        totalCadaCuota: parseInt(resultado / 12)
-                    }
-
-                ];
-
-                const cuotasElegidas = parseInt(document.getElementById('cuotasCantidad').value);
-                const filtro = cuotasDisponibles.find((cuota) => cuota.cuotas >= cuotasElegidas);
-
-                function cuotasFunction() {
-
-                    const disponibleCuota = JSON.stringify(filtro.cuotas);
-                    const disponiblePrecio = JSON.stringify(filtro.totalCadaCuota);
-
-                    contenedor.innerHTML = ``;
-
-                    let financiacion = document.createElement('div');
-                    financiacion.innerHTML = `<div class="titulo subtitulo">
-                            Las cuotas disponibles en base a su solicitud son: ${disponibleCuota} y el valor de cada una será de: $${disponiblePrecio}
-                            </div>
-                            <button id="finalizar" type="submit" class="btn btn-primary">Finalizar</button>`;
-                    contenedor.append(financiacion);
-                }
-
-                cuotasElegidas <= 12 ? cuotasFunction() : alert('Lo siento, esa cantidad de cuotas no está disponible en este momento');
-
-                let finalizar = document.getElementById('finalizar');
-
-                finalizar.onclick = () => {
-                    contenedor.innerHTML = ``;
-
-                    let fin = document.createElement('div');
-                    fin.innerHTML = `<div class="titulo subtitulo">
-                    Gracias por elegirnos, por favor ingrese los siguientes datos para que un representante se ponga en contacto con usted:
-                    <form class="container" action="#" method="post">
-                    <div class="form">
-                        <label for="nombre">Nombre y apellido:</label>
-                        <input id="nombre" type="text" class="form-control" placeholder="Nombre Apellido">
-                        <label for="telefono">Teléfono:</label>
-                        <input id="telefono" type="number" class="form-control" placeholder="1112345678">
-                        <label for="nombreUsuario">Email</label>
-                        <input id="email" type="email" class="form-control" placeholder="ejempl@gmail.com">
-                        <div>
-                            <button id="contacto" type="submit" class="btn btn-primary">Contactarme</button>
-                        </div>
-                    </div>
-                </form>
-                    </div>`;
-                    contenedor.append(fin);
-
-                    let contactame = document.getElementById('contacto');
-
-                    contactame.onclick = (evento) => {
-
-                        let nombreNoCliente = document.getElementById('nombre').value;
-                        let telefonoNoCliente = document.getElementById('telefono').value;
-                        let emailNoCliente = document.getElementById('email').value;
-                        evento.preventDefault();
-
-                        const datos = {
-                            nombre: nombreNoCliente,
-                            telefono: telefonoNoCliente,
-                            email: emailNoCliente
-                        }
-
-                        let { nombre, telefono, email } = datos
-
-                        contenedor.innerHTML = ``;
-
-                        let contacto = document.createElement('div');
-                        contacto.innerHTML = `
-                        <div class="titulo subtitulo">
-                            <div>${nombre} un represtenate se pondrá en contacto con usted a los medios proporcionados: </div>
-                            <div>Teléfono: ${telefono}</div>
-                            <div>Email: ${email}</div>
-                        </div>`;
-                        contenedor.append(contacto);
-                    }
-                }
-            }
-        }
+        });
     }
 }
 

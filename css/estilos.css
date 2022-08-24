@@ -29,8 +29,9 @@ main{
 }
 
 .subtitulo {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     padding: 1.4rem;
+    text-align: center;
 }
 
 form {
@@ -91,9 +92,14 @@ iframe {
 
 .imgTarjeta {
     
-    width: 50vw;
+    width: 25vw;
     height: auto;
     padding: 1rem;
+    
+}
+
+.cardTitle {
+    text-decoration: underline;
     
 }
 

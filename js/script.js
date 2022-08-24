@@ -13,13 +13,21 @@ class Usuario {
 
 const usuario1 = new Usuario('usuario01', 'entrar01');
 
-cliente.onclick = () => {
+
+function limpiarInicio() {
+    let nav = document.getElementById('nav');
+    nav.remove();
 
     let section = document.getElementById('section1');
     section.remove();
 
     let img = document.getElementById('img');
     img.remove();
+}
+
+
+cliente.onclick = () => {
+    limpiarInicio()
 
     let contenedor = document.getElementById(`contenedor`);
 
@@ -72,7 +80,7 @@ cliente.onclick = () => {
 
                 Toastify({
                     text: 'Su ' + nombreUsuarioLocal + ' ha sido guardado con éxito',
-                    duration: 3000,
+                    duration: 2000,
                     newWindow: true,
                     offset: {
                         y: '200%'
@@ -90,7 +98,7 @@ cliente.onclick = () => {
                 const nombreUsuarioSession = sessionStorage.getItem('nombre');
                 Toastify({
                     text: 'Su ' + nombreUsuarioSession + ' no se ha guardado en este dispositivo',
-                    duration: 3000,
+                    duration: 2000,
                     newWindow: true,
                     offset: {
                         y: '200%'
@@ -272,14 +280,14 @@ cliente.onclick = () => {
                                 array.forEach(representante => {
                                     const ficha = `
                                     <div class="tarjetas">
-                                        <div class="card" style="width: 20rem;">
-                                             <img src="recursos/representante.jpg" class="card-img-top" alt="representante">
+                                        <div class="card" style="width: 30rem;">
+                                             <img src="recursos/representante.jpg" class="card-img-top" alt="imagen ilustrativa de representante">
                                              <div class="card-body">
-                                                <h2 class="card-title">${representante.name}</h2>
+                                                <h4 class="card-title cardTitle">${representante.name}</h4>
                                                 <p class="card-text">Email: ${representante.email}</p>
                                                 <p class="card-text">Web Site: ${representante.website}</p>
                                                 <p class="card-text">Teléfono: ${representante.phone}</p>
-                                                <h3 class="card-text">Gracias por elegirnos. Lo contactaremos a la brevedad</h3>
+                                                <h4 class="card-text">Gracias por elegirnos. Lo contactaremos a la brevedad</h4>
                                             </div>
                                         </div>
                                     </div>`
@@ -318,11 +326,7 @@ cliente.onclick = () => {
 
 quieroCliente.onclick = () => {
 
-    let section = document.getElementById('section1');
-    section.remove();
-
-    let img = document.getElementById('img');
-    img.remove();
+    limpiarInicio()
 
     let contenedor = document.getElementById(`contenedor`);
 
@@ -332,13 +336,13 @@ quieroCliente.onclick = () => {
         <form class="container" action="#" method="post">
             <div class="form">
                 <label for="nombre">Ingrese su nombre y apellido:</label>
-                <input id="usuario" type="text" class="form-control" placeholder="Nombre Apellido">
+                <input id="usuario" type="text" class="form-control" placeholder="Nombre Apellido" required>
                 <label for="telefono">Ingrese un teléfono de contacto:</label>
-                <input id="telefono" type="number" class="form-control" placeholder="1112345678">
-                <label for="nombreUsuario">Ingrese un nombre de usuario:</label>
-                <input id="nombreUsuario" type="text" class="form-control" placeholder="juan01">
-                <label for="contrasenia">Ingrese una contraseña:</label>
-                <input id="contrasenia" type="password" class="form-control" placeholder="********">
+                <input id="telefono" type="number" class="form-control" placeholder="1112345678" required>
+                <label for="nombreUsuario">Cree un nombre de usuario:</label>
+                <input id="nombreUsuario" type="text" class="form-control" placeholder="juan01" required>
+                <label for="contrasenia">Cree una contraseña:</label>
+                <input id="contrasenia" type="password" class="form-control" placeholder="********" required>
                 <div>
                     <button id="ingreso" type="submit" class="btn btn-primary">Crear</button>
                 </div>
@@ -352,128 +356,149 @@ quieroCliente.onclick = () => {
 
     ingreso.onclick = (evento) => {
 
-        let clienteUsuario = document.getElementById('usuario').value;
-        let clienteTelefono = document.getElementById('telefono').value;
-        let identificacionUsuario = document.getElementById('nombreUsuario').value;
-        let contraseniaUsuario = document.getElementById('contrasenia').value;
-        evento.preventDefault();
+        let name = document.getElementById('usuario');
+        let tel = document.getElementById('telefono');
+        let nameUsuario = document.getElementById('nombreUsuario');
+        let contrasenia = document.getElementById('contrasenia');
 
-        const usuario = {
+        if (name.value != '' && tel.value != '' && nameUsuario.value != '' && contrasenia.value != '') {
 
-            cliente: clienteUsuario,
-            telefono: clienteTelefono,
-            identificacion: identificacionUsuario,
-            contrasenia: contraseniaUsuario,
-        }
+            let clienteUsuario = document.getElementById('usuario').value;
+            let clienteTelefono = document.getElementById('telefono').value;
+            let identificacionUsuario = document.getElementById('nombreUsuario').value;
+            let contraseniaUsuario = document.getElementById('contrasenia').value;
+            evento.preventDefault();
 
-        const { cliente, telefono } = usuario
+            const usuario = {
 
-        Toastify({
-            text: cliente + ' su usuario fue creado con éxito, a continuación le mostramos los planes que podemos ofrecerle',
-            duration: 5000,
-            newWindow: true,
-            offset: {
-                x: '50%',
-                y: '50%'
-            },
-            style: {
-                background: "	#7B68EE",
+                cliente: clienteUsuario,
+                telefono: clienteTelefono,
+                identificacion: identificacionUsuario,
+                contrasenia: contraseniaUsuario,
             }
-        }).showToast();
 
-        let section2 = document.getElementById('section2');
-        section2.remove();
+            const { cliente, telefono } = usuario
 
-        const tarjetaCredito = [{ plan: 'Básico', limiteExtraccion: 20000, limiteCompra: 100000, limiteCuotas: 90000, descripcion: 'Plan básico, sencillo y cómodo, cuenta con un límite para compras en cuotas y en un solo pago reducido para el uso conservado.' }, { plan: 'Platino', limiteExtraccion: 40000, limiteCompra: 280000, limiteCuotas: 260000, descripcion: 'Plan aumentado, un plan con un límite superior para compras tanto en cuotas como en un pago.' }, { plan: 'Dorado', limiteExtraccion: 80000, limiteCompra: 400000, limiteCuotas: 390000, descripcion: 'Plan pre full, un plan con un límite extendido y holgado para la comodidad del usuario.' }, { plan: 'Black', limiteExtraccion: 150000, limiteCompra: 1200000, limiteCuotas: 1000000, descripcion: 'El plan black es un plan full premium que cuenta con un límite de más de un millón de pesos para compras en un pago o en cuotas' }];
+            Toastify({
+                text: cliente + ' su usuario fue creado con éxito, a continuación le mostramos los planes que podemos ofrecerle:',
+                duration: 4000,
+                newWindow: true,
+                offset: {
+                    x: '50%',
+                    y: '50%'
+                },
+                style: {
+                    background: "	#7B68EE",
+                }
+            }).showToast();
 
-        for (const tarjeta of tarjetaCredito) {
+            let section2 = document.getElementById('section2');
+            section2.remove();
 
-            plan1 = document.createElement('div');
-            plan1.innerHTML = `<div class="subtitulo">
-            ${tarjeta.plan}: Límite de extracción por cajero automático: $${tarjeta.limiteExtraccion}. Límite para compra en un pago: $${tarjeta.limiteCompra}. Límite para compra en cuotas: $${tarjeta.limiteCuotas}. ${tarjeta.descripcion}.
+            const tarjetaCredito = [{ plan: 'Básico', limiteExtraccion: 20000, limiteCompra: 100000, limiteCuotas: 90000, descripcion: 'Plan básico, sencillo y cómodo, cuenta con un límite para compras en cuotas y en un solo pago reducido para el uso conservado.' }, { plan: 'Platino', limiteExtraccion: 40000, limiteCompra: 280000, limiteCuotas: 260000, descripcion: 'Plan aumentado, un plan con un límite superior para compras tanto en cuotas como en un pago.' }, { plan: 'Dorado', limiteExtraccion: 80000, limiteCompra: 400000, limiteCuotas: 390000, descripcion: 'Plan pre full, un plan con un límite extendido y holgado para la comodidad del usuario.' }, { plan: 'Black', limiteExtraccion: 150000, limiteCompra: 1200000, limiteCuotas: 1000000, descripcion: 'El plan black es un plan full premium que cuenta con un límite de más de un millón de pesos para compras en un pago o en cuotas' }];
+
+            for (const tarjeta of tarjetaCredito) {
+
+                plan1 = document.createElement('div');
+                plan1.innerHTML = `<div class="subtitulo">
+            ${tarjeta.plan}: Límite de extracción por cajero automático: $${tarjeta.limiteExtraccion}. Límite para compra en un pago: $${tarjeta.limiteCompra}. Límite para compra en cuotas: $${tarjeta.limiteCuotas}. ${tarjeta.descripcion}
             </div>`;
 
-            contenedor.append(plan1);
-        }
+                contenedor.append(plan1);
+            }
 
-        boton = document.createElement('div');
-        boton.className = 'titulo subtitulo';
-        boton.innerHTML = `<div id="botones">
+            boton = document.createElement('div');
+            boton.className = 'titulo subtitulo';
+            boton.innerHTML = `
+            <div>Seleccione el plan de su interés:</div>
+            <div id="botones">
             <button id="basico" type="submit" class="btn btn-primary">Basico</button>
             <button id="platino" type="submit" class="btn btn-primary">Platino</button>
             <button id="dorado" type="submit" class="btn btn-primary">Dorado</button>
             <button id="black" type="submit" class="btn btn-primary">Black</button>
             </div>`;
 
-        contenedor.append(boton);
+            contenedor.append(boton);
 
-        let basico = document.getElementById('basico');
+            let basico = document.getElementById('basico');
 
-        basico.onclick = () => {
+            basico.onclick = () => {
 
-            contenedor.innerHTML = ``;
+                contenedor.innerHTML = ``;
 
-            let titulo = document.createElement('h3');
-            titulo.innerHTML = `<h3 class="titulo">Plan elegido: Básico</h3>
+                let titulo = document.createElement('h3');
+                titulo.innerHTML = `<h3 class="titulo">Plan elegido: Básico</h3>
             <h2 class="subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted al: ${telefono}. Saludos. </h2>
             <img id="img1" class="imgTarjeta" src="recursos/basico.png" alt="JavaScript">
             `
-            contenedor.append(titulo);
-        }
+                contenedor.append(titulo);
+            }
 
-        let platino = document.getElementById('platino');
+            let platino = document.getElementById('platino');
 
-        platino.onclick = () => {
+            platino.onclick = () => {
 
-            contenedor.innerHTML = ``;
+                contenedor.innerHTML = ``;
 
-            let titulo = document.createElement('h3');
-            titulo.innerHTML = `<h3 class="titulo">Plan elegido: Platino</h3>
+                let titulo = document.createElement('h3');
+                titulo.innerHTML = `<h3 class="titulo">Plan elegido: Platino</h3>
             <h2 class="subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted al: ${telefono}. Saludos. </h2>
             <img id="img1" class="imgTarjeta" src="recursos/platino.png" alt="JavaScript">`
 
-            contenedor.append(titulo);
-        }
+                contenedor.append(titulo);
+            }
 
-        let dorado = document.getElementById('dorado');
+            let dorado = document.getElementById('dorado');
 
-        dorado.onclick = () => {
+            dorado.onclick = () => {
 
-            contenedor.innerHTML = ``;
+                contenedor.innerHTML = ``;
 
-            let titulo = document.createElement('h3');
-            titulo.innerHTML = `<h3 class="titulo">Plan elegido: Dorado</h3>
+                let titulo = document.createElement('h3');
+                titulo.innerHTML = `<h3 class="titulo">Plan elegido: Dorado</h3>
                 <h2 class="subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted al: ${telefono}. Saludos. </h2>
                 <img id="img1" class="imgTarjeta" src="recursos/dorado.png" alt="JavaScript">`
 
-            contenedor.append(titulo);
-        }
+                contenedor.append(titulo);
+            }
 
-        let black = document.getElementById('black');
+            let black = document.getElementById('black');
 
-        black.onclick = () => {
+            black.onclick = () => {
 
-            contenedor.innerHTML = ``;
+                contenedor.innerHTML = ``;
 
-            let titulo = document.createElement('h3');
-            titulo.innerHTML = `<h3 class="titulo">Plan elegido: Black</h3>
+                let titulo = document.createElement('h3');
+                titulo.innerHTML = `<h3 class="titulo">Plan elegido: Black</h3>
             <h2 class="subtitulo">Muchas gracias por elegirnos, en un momento un representante se pondrá en contacto con usted al: ${telefono}. Saludos. </h2>
                     <img id="img1" class="imgTarjeta" src="recursos/black.png" alt="JavaScript">`
 
-            contenedor.append(titulo);
+                contenedor.append(titulo);
+            }
+        } else {
+
+            Toastify({
+                text: 'Faltan datos obligatorios',
+                duration: 1500,
+                newWindow: true,
+                offset: {
+                    y: '200%'
+                },
+                position: "center",
+                stopOnFocus: true,
+                style: {
+                    background: "#7B68EE",
+                }
+            }).showToast();
         }
     }
 }
 
 noCliente.onclick = (prevent) => {
-    
+
     prevent.preventDefault();
 
-    let section = document.getElementById('section1');
-    section.remove();
-
-    let img = document.getElementById('img');
-    img.remove();
+    limpiarInicio()
 
     let tasaInteres = 10;
 
@@ -518,19 +543,19 @@ noCliente.onclick = (prevent) => {
     contenedor.prepend(titulo);
 
     function minMax() {
-        
+
         const cuotasDisponibles = [1, 3, 6, 9, 12];
 
         let min = Math.min(...cuotasDisponibles);
-        
+
         let max = Math.max(...cuotasDisponibles);
 
         let cuotas = document.createElement('div');
-        cuotas.className = 'titulo subtitulo';
+        cuotas.className = 'subtitulo';
         cuotas.innerHTML = `<div id="cuotasId">
             <form class="container" action="#" method="post" id="cuotasId">
             <div class="form">
-            <label for="cuotasCantidad">Sabiendo que la cantidad mínimo de cuotas es ${min} y el máximo ${max} por favor ingrese la cantidad en las cuales le gustaría saldar su deuda:</label>
+            <label for="cuotasCantidad">Sabiendo que la cantidad mínima de cuotas es ${min} y la máxima ${max} por favor ingrese en cuantas cuotas le gustaría saldar su deuda:</label>
             <input id="cuotasCantidad" type="text" class="form-control" placeholder="1, 2, 3...">
             <button id="cuotasBoton" type="submit" class="btn btn-primary">Cuotas</button>
             </form>
@@ -541,9 +566,9 @@ noCliente.onclick = (prevent) => {
     }
 
     let radioButtons = document.getElementsByClassName('radio');
-    
+
     for (let button of radioButtons) {
-        
+
         button.addEventListener('click', (valor) => {
 
             let radioNoCliente = document.getElementById('radioNoCliente');
@@ -618,16 +643,16 @@ noCliente.onclick = (prevent) => {
                         contenedor.innerHTML = ``;
 
                         let fin = document.createElement('div');
-                        fin.innerHTML = `<div class="titulo subtitulo">
+                        fin.innerHTML = `<div class="subtitulo">
                         Gracias por elegirnos, por favor ingrese los siguientes datos para que un representante se ponga en contacto con usted:
                         <form class="container" action="#" method="post">
                         <div class="form">
                             <label for="nombre">Nombre y apellido:</label>
-                            <input id="nombre" type="text" class="form-control" placeholder="Nombre Apellido">
+                            <input id="nombre" type="text" class="form-control" placeholder="Nombre Apellido" required>
                             <label for="telefono">Teléfono:</label>
-                            <input id="telefono" type="number" class="form-control" placeholder="1112345678">
+                            <input id="telefono" type="number" class="form-control" placeholder="1112345678" required>
                             <label for="nombreUsuario">Email</label>
-                            <input id="email" type="email" class="form-control" placeholder="ejempl@gmail.com">
+                            <input id="email" type="email" class="form-control" placeholder="ejempl@gmail.com" required>
                             <div>
                                 <button id="contacto" type="submit" class="btn btn-primary">Contactarme</button>
                             </div>
@@ -638,32 +663,58 @@ noCliente.onclick = (prevent) => {
 
                         let contactame = document.getElementById('contacto');
 
-                        contactame.onclick = (evento) => {
+                        contactame.onclick = () => {
 
-                            let nombreNoCliente = document.getElementById('nombre').value;
-                            let telefonoNoCliente = document.getElementById('telefono').value;
-                            let emailNoCliente = document.getElementById('email').value;
-                            evento.preventDefault();
+                            let name = document.getElementById('nombre');
+                            let tel = document.getElementById('telefono');
+                            let email = document.getElementById('email');
 
-                            const datos = {
-                                nombre: nombreNoCliente,
-                                telefono: telefonoNoCliente,
-                                email: emailNoCliente
-                            }
+                            if (name.value != '' && tel.value != '' && email.value != '') {
 
-                            let { nombre, telefono, email } = datos
+                                let nombreNoCliente = document.getElementById('nombre').value;
+                                let telefonoNoCliente = document.getElementById('telefono').value;
+                                let emailNoCliente = document.getElementById('email').value;
 
-                            contenedor.innerHTML = ``;
+                                const datos = {
+                                    nombre: nombreNoCliente,
+                                    telefono: telefonoNoCliente,
+                                    email: emailNoCliente
+                                }
 
-                            let contacto = document.createElement('div');
-                            contacto.innerHTML = `
-                            <div class="titulo subtitulo">
-                                <div>${nombre} un represtenate se pondrá en contacto con usted a los medios proporcionados: </div>
+                                let { nombre, telefono, email } = datos
+
+                                contenedor.innerHTML = ``;
+
+                                let contacto = document.createElement('div');
+                                contacto.innerHTML = `
+                            <div class="subtitulo">
+                                <div class="cardTitle">${nombre} un representante se pondrá en contacto con usted a los medios proporcionados: </div>
+                            </div>
+                            <div class="subtitulo">
                                 <div>Teléfono: ${telefono}</div>
                                 <div>Email: ${email}</div>
+                                <div>Saludos</div>
                             </div>`;
-                            contenedor.append(contacto);
+                                contenedor.append(contacto);
 
+                            }
+
+                            else {
+
+                                Toastify({
+                                    text: 'Faltan datos obligatorios',
+                                    duration: 1500,
+                                    newWindow: true,
+                                    offset: {
+                                        y: '200%'
+                                    },
+                                    position: "center",
+                                    stopOnFocus: true,
+                                    style: {
+                                        background: "#7B68EE",
+                                    }
+                                }).showToast();
+                            }
                         }
                     }
                 }
